@@ -1,6 +1,6 @@
 ---
 title: "Evaluating LLM outputs in production: 22 benchmarks, a 90% gate"
-description: "How I evaluate LLM outputs in production: a 22-benchmark eval harness with tiered assertions (schema, sport, step count, zone accuracy) and a hard 90% CI gate that fails the build on regressions."
+description: "How I evaluate LLM outputs in production: a 22-benchmark eval harness with tiered assertions and a hard 90% CI gate that fails the build on regressions."
 pubDate: 2026-07-18
 faq:
   - q: "What is an LLM eval harness?"
