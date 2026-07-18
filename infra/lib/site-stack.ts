@@ -128,7 +128,12 @@ function handler(event) {
             "token.actions.githubusercontent.com:aud": "sts.amazonaws.com",
           },
           StringLike: {
-            "token.actions.githubusercontent.com:sub": `repo:${GITHUB_REPO}:ref:refs/heads/main`,
+            // GitHub is rolling out immutable-ID sub claims
+            // (owner@id/repo@id); accept both formats.
+            "token.actions.githubusercontent.com:sub": [
+              `repo:${GITHUB_REPO}:ref:refs/heads/main`,
+              "repo:pablo-albaladejo@7994467/pabloalbaladejo.com@1304978356:ref:refs/heads/main",
+            ],
           },
         }
       ),
