@@ -10,6 +10,7 @@ type Props = {
 
 const { title, description, lang, path } = Astro.props;
 const site = "https://pabloalbaladejo.com";
+const umamiId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 const enPath = path.startsWith("/es") ? path.replace(/^\/es\/?/, "/") : path;
 const esPath = path.startsWith("/es")
   ? path
@@ -39,6 +40,16 @@ const esPath = path.startsWith("/es")
       property="og:locale"
       content={lang === "es" ? "es_ES" : "en_US"}
     />
+    {
+      umamiId && (
+        <script
+          is:inline
+          defer
+          src="https://cloud.umami.is/script.js"
+          data-website-id={umamiId}
+        />
+      )
+    }
     <slot name="head" />
   </head>
   <body

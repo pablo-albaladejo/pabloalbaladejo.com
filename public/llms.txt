@@ -15,6 +15,9 @@
 - [Kaiord](https://kaiord.com): open-source, local-first training platform
   (calendar, AI assistant, Garmin & WHOOP sync, TypeScript SDK, CLI, MCP
   server). Docs corpus for LLMs: https://kaiord.com/docs/llms-full.txt
+- [Deepgent](https://deepgent.net): multi-tenant SaaS platform giving
+  companies a branded AI chatbot over their own curated knowledge base
+  (embeddable widget, self-service portal, RAG on AWS Bedrock)
 
 ## Profiles
 
