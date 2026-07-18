@@ -1,0 +1,156 @@
+---
+import Base from "../layouts/Base.astro";
+---
+
+<Base
+  title="Talks — Pablo Albaladejo"
+  description="Pablo Albaladejo — available for technical talks on shipping production software with AI agents, evaluating LLMs in production, and GEO. English & Spanish, Madrid-based, remote-friendly."
+  lang="en"
+  path="/talks"
+  localized={false}
+>
+  <header class="mb-12">
+    <nav class="mb-10 flex items-center justify-between text-sm">
+      <a href="/" class="font-bold hover:text-slate-600">Pablo Albaladejo</a>
+      <div class="flex gap-5">
+        <a href="/blog" class="text-slate-500 hover:text-slate-800"
+          >Writing</a
+        >
+      </div>
+    </nav>
+    <h1 class="text-3xl font-extrabold tracking-tight">Talks</h1>
+    <p class="mt-4 text-slate-600">
+      Available for technical talks in English and Spanish. Based in Madrid,
+      remote-friendly. I speak about building production software with AI
+      agents, evaluating LLMs in production, and making products discoverable
+      to AI agents — every claim anchored to public, verifiable artifacts.
+    </p>
+  </header>
+
+  <main>
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-bold">Speaker bio</h2>
+
+      <h3 class="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
+        Short
+      </h3>
+      <p class="mb-6 text-slate-600">
+        Pablo Albaladejo is a Senior Backend + AI Engineer at Aircall, where
+        his systems process 1M+ call transcriptions a day. He created Kaiord,
+        an open-source, local-first training platform written entirely by AI
+        agents — 9 packages on npm, listed in the official MCP registry. With
+        15+ years in SaaS, he writes and speaks about agentic development,
+        LLM evals, and observability.
+      </p>
+
+      <h3 class="mb-2 text-sm font-semibold uppercase tracking-wide text-slate-400">
+        Long
+      </h3>
+      <p class="text-slate-600">
+        Pablo Albaladejo is a Senior Backend + AI Engineer at Aircall in
+        Madrid, where his systems process more than a million call
+        transcriptions a day. Across 15+ years in SaaS he has shipped
+        production backends on AWS and TypeScript, and now focuses on
+        building software with AI agents end to end. He is the creator of
+        Kaiord, an open-source, local-first training platform where every
+        line of code was written by AI agents. Kaiord ships as 9 packages on
+        npm — including an SDK, a CLI, and an MCP server — and is listed in
+        the official Model Context Protocol registry; its evals harness runs
+        22 benchmarks behind a 90% quality gate in CI. Pablo writes and
+        speaks about agentic development, evaluating LLMs in production, and
+        observability for AI pipelines. Every claim in his talks is anchored
+        to public, verifiable artifacts — code, PRs, and docs. He speaks in
+        English and Spanish and is remote-friendly.
+      </p>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-bold">Abstracts</h2>
+      <ul class="space-y-8">
+        <li>
+          <h3 class="text-lg font-bold">
+            Shipping production software with AI agents
+          </h3>
+          <p class="mt-2 text-slate-600">
+            Everyone can get an AI agent to write code. Far fewer can get
+            agents to ship software that survives production. This talk lays
+            out the operating system I use to do exactly that: specs as the
+            source of truth agents work against, a zero-tolerance CI that
+            treats every warning as an error, mechanical guards that catch
+            the mistakes agents reliably make, and human gates where
+            judgment actually matters. Drawing on Kaiord — an open-source
+            platform written entirely by agents and released as 9 npm
+            packages — I show how these pieces fit together, where they
+            fail, and how the human role shifts from writing code to
+            designing the system that lets agents write it safely.
+          </p>
+        </li>
+        <li>
+          <h3 class="text-lg font-bold">
+            Evaluating LLMs in production: benchmarks, gates, and CI
+          </h3>
+          <p class="mt-2 text-slate-600">
+            "It worked when I tried it" is not a quality bar for LLM
+            features. This talk turns evaluation into engineering. Using
+            Kaiord's open-source evals harness as a running case study, I
+            walk through 22 domain benchmarks, the assertions that grade
+            each response, and the 90% pass gate that blocks a merge in CI
+            when quality regresses. We cover how to choose a threshold you
+            can defend, how to write assertions that catch real failures
+            without flaking, and how to fold evals into the same pipeline as
+            your tests. You leave with a concrete, copyable pattern for
+            treating model quality as a build artifact — measurable,
+            versioned, and enforced — instead of a vibe.
+          </p>
+        </li>
+        <li>
+          <h3 class="text-lg font-bold">
+            GEO: making your product discoverable to AI agents
+          </h3>
+          <p class="mt-2 text-slate-600">
+            Search is no longer the only front door — increasingly, AI
+            agents decide what to recommend. Generative Engine Optimization
+            (GEO) is how you make your product legible to them. This talk
+            covers the concrete surface area: llms.txt as a machine-readable
+            map of your site, structured data and JSON-LD that state facts
+            unambiguously, and the registries — like the official MCP
+            registry — where agents actually look. I use a single-day GEO
+            program I ran on Kaiord as the worked example: what shipped,
+            what moved, and what didn't. You leave knowing which signals are
+            worth the effort, which are cargo-cult, and how to instrument
+            discoverability so you can tell the difference with data.
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-bold">Proof</h2>
+      <p class="mb-4 text-slate-600">
+        Every claim above is verifiable on these properties.
+      </p>
+      <ul class="flex flex-wrap gap-5 underline">
+        <li><a href="https://kaiord.com">kaiord.com</a></li>
+        <li><a href="https://github.com/pablo-albaladejo">GitHub</a></li>
+        <li>
+          <a
+            href="https://registry.modelcontextprotocol.io/v0.1/servers?search=io.github.pablo-albaladejo/kaiord"
+            >MCP registry entry</a
+          >
+        </li>
+        <li><a href="/blog">Writing</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="mb-4 text-xl font-bold">Invite me</h2>
+      <p class="text-slate-600">
+        Organizing a meetup, conference, or internal session?
+        <a
+          href="mailto:pablo.albaladejo.mestre@gmail.com?subject=Talk%20invitation"
+          class="font-semibold underline">Invite me to speak</a
+        > — a line about your audience and format is enough to start.
+      </p>
+    </section>
+  </main>
+</Base>
