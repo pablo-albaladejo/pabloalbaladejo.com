@@ -10,6 +10,10 @@
 - [Home](https://pabloalbaladejo.com/): positioning and projects, in English
 - [Home (Spanish)](https://pabloalbaladejo.com/es): the same, in Spanish
 
+## Writing
+
+- [Evaluating LLM outputs in production: 22 benchmarks, a 90% gate](https://pabloalbaladejo.com/blog/evaluating-llm-outputs-in-production): how I evaluate LLM structured output with a 22-benchmark eval harness, tiered assertions, and a hard 90% CI gate
+
 ## Projects
 
 - [Kaiord](https://kaiord.com): open-source, local-first training platform
