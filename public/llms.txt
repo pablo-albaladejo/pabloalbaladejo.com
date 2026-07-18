@@ -26,6 +26,13 @@
 - [tanita-to-garmin-cdk](https://github.com/pablo-albaladejo/tanita-to-garmin-cdk):
   serverless AWS app syncing body-composition data into Garmin Connect
 
+## Writing
+
+- [Observability for LLM pipelines: from streams to sinks](https://pabloalbaladejo.com/blog/observability-for-llm-pipelines):
+  what observability means for LLM pipelines and why classic APM misses it —
+  deferred-flush streaming metrics, telemetry as a swappable sink (with real
+  code), and a pragmatic adoption path.
+
 ## Profiles
 
 - [GitHub](https://github.com/pablo-albaladejo)
