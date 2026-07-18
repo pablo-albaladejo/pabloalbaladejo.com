@@ -1,0 +1,49 @@
+---
+import "../styles/global.css";
+
+type Props = {
+  title: string;
+  description: string;
+  lang: "en" | "es";
+  path: string;
+};
+
+const { title, description, lang, path } = Astro.props;
+const site = "https://pabloalbaladejo.com";
+const enPath = path.startsWith("/es") ? path.replace(/^\/es\/?/, "/") : path;
+const esPath = path.startsWith("/es")
+  ? path
+  : `/es${path === "/" ? "" : path}`;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={`${site}${path}`} />
+    <link rel="alternate" hreflang="en" href={`${site}${enPath}`} />
+    <link rel="alternate" hreflang="es" href={`${site}${esPath}`} />
+    <link rel="alternate" hreflang="x-default" href={`${site}${enPath}`} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={`${site}${path}`} />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Pablo Albaladejo" />
+    <meta
+      property="og:locale"
+      content={lang === "es" ? "es_ES" : "en_US"}
+    />
+    <slot name="head" />
+  </head>
+  <body
+    class="mx-auto max-w-2xl bg-white px-6 py-12 font-sans leading-relaxed text-slate-800 antialiased"
+  >
+    <slot />
+  </body>
+</html>

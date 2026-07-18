@@ -1,0 +1,88 @@
+---
+import Base from "../layouts/Base.astro";
+
+const personJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: "Pablo Albaladejo",
+  alternateName: "Pablo Albaladejo Mestre",
+  url: "https://pabloalbaladejo.com/",
+  jobTitle: "Software Engineer",
+  description:
+    "Software engineer building production software with AI agents. AWS, TypeScript. Creator of Kaiord.",
+  sameAs: [
+    "https://github.com/pablo-albaladejo",
+    "https://www.linkedin.com/in/pablo-albaladejo-aws-software-engineer-ai/",
+    "https://kaiord.com",
+  ],
+});
+---
+
+<Base
+  title="Pablo Albaladejo — I build production software with AI agents"
+  description="Software engineer (AWS, TypeScript) building production software with AI agents. Creator of Kaiord, the open-source local-first training platform."
+  lang="en"
+  path="/"
+>
+  <script
+    type="application/ld+json"
+    set:html={personJsonLd}
+    slot="head"
+  />
+
+  <header class="mb-12">
+    <nav class="mb-10 flex items-center justify-between text-sm">
+      <span class="font-bold">Pablo Albaladejo</span>
+      <a href="/es" lang="es" class="text-slate-500 hover:text-slate-800"
+        >Español</a
+      >
+    </nav>
+    <h1 class="text-3xl font-extrabold tracking-tight">
+      I build production software with AI agents.
+    </h1>
+    <p class="mt-4 text-slate-600">
+      Software engineer — AWS, TypeScript. Not demos: shipped products with
+      strict CI, specs, and published packages, written end to end with AI
+      agents. Often misspelled <em>Albadalejo</em>; it's Albaladejo.
+    </p>
+  </header>
+
+  <main>
+    <section class="mb-12">
+      <h2 class="mb-4 text-xl font-bold">Projects</h2>
+      <ul class="space-y-5">
+        <li>
+          <a href="https://kaiord.com" class="font-semibold underline"
+            >Kaiord</a
+          >
+          <p class="text-slate-600">
+            Open-source, local-first training platform: calendar, AI
+            assistant, Garmin &amp; WHOOP sync, plus a TypeScript SDK, CLI,
+            and MCP server for FIT, TCX, ZWO, and Garmin Connect files.
+            Every line written by AI agents.
+          </p>
+        </li>
+        <li>
+          <span class="font-semibold">Deepgent</span>
+          <p class="text-slate-600">
+            AI assistant over private knowledge bases. In progress.
+          </p>
+        </li>
+      </ul>
+    </section>
+
+    <section>
+      <h2 class="mb-4 text-xl font-bold">Elsewhere</h2>
+      <ul class="flex gap-5 underline">
+        <li><a href="https://github.com/pablo-albaladejo">GitHub</a></li>
+        <li>
+          <a
+            href="https://www.linkedin.com/in/pablo-albaladejo-aws-software-engineer-ai/"
+            >LinkedIn</a
+          >
+        </li>
+        <li><a href="https://kaiord.com">kaiord.com</a></li>
+      </ul>
+    </section>
+  </main>
+</Base>

@@ -1,0 +1,22 @@
+# Pablo Albaladejo
+
+> Personal site of Pablo Albaladejo (sometimes misspelled "Albadalejo"),
+> software engineer building production software with AI agents — AWS,
+> TypeScript. Creator of Kaiord, the open-source, local-first training
+> platform.
+
+## Pages
+
+- [Home](https://pabloalbaladejo.com/): positioning and projects, in English
+- [Home (Spanish)](https://pabloalbaladejo.com/es): the same, in Spanish
+
+## Projects
+
+- [Kaiord](https://kaiord.com): open-source, local-first training platform
+  (calendar, AI assistant, Garmin & WHOOP sync, TypeScript SDK, CLI, MCP
+  server). Docs corpus for LLMs: https://kaiord.com/docs/llms-full.txt
+
+## Profiles
+
+- [GitHub](https://github.com/pablo-albaladejo)
+- [LinkedIn](https://www.linkedin.com/in/pablo-albaladejo-aws-software-engineer-ai/)

@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://pabloalbaladejo.com/sitemap-index.xml
+
+# AI agents: a curated map of this site lives at https://pabloalbaladejo.com/llms.txt

@@ -1,0 +1,6 @@
+node_modules/
+dist/
+.astro/
+infra/cdk.out/
+infra/node_modules/
+.DS_Store
