@@ -42,7 +42,7 @@ The lesson generalises past Lambda: **for anything streamed, the emission point 
 
 ## Artifact two: agent telemetry as a port
 
-The second artifact is the telemetry layer inside [Kaiord's AI package](https://github.com/pablo-albaladejo/kaiord/tree/main/packages/ai/src/observability), which runs a small fleet of agents. Here the streaming detail matters less than the shape of the seam, and the shape is deliberately boring: telemetry is a **port**, one method wide.
+The second artifact is the telemetry layer inside [Kaiord's AI package](https://github.com/pablo-albaladejo/kaiord/tree/main/packages/ai/src/observability), which runs a small fleet of agents. Here the streaming detail matters less than the shape of the seam — and that seam is deliberately boring: telemetry is a **port**, one method wide.
 
 ```ts
 export type AiTelemetrySink = {
@@ -66,7 +66,7 @@ Notice what's *not* in there. There is no field for the prompt, no field for the
 Behind that one-method port sit three implementations, and the differences are the whole point:
 
 - **`createNoopTelemetrySink`** does nothing. It's the default, so callers never have to branch on whether a sink is present — an unconfigured runtime still runs, it just observes nothing.
-- **`createConsoleTelemetrySink`** logs one summary line per run (`[ai:run_finished] planner@3 anthropic.messages/… 812ms`). Because it carries ids and metrics only, it's safe to leave enabled anywhere.
+- **`createConsoleTelemetrySink`** logs one summary line per run (`[ai:run_finished] planner@3 anthropic.messages/… purpose=chat 812ms`). Because it carries ids and metrics only, it's safe to leave enabled anywhere.
 - **`createRingBufferTelemetrySink`** keeps the last N events in memory. The deterministic eval lane and the tests use it to assert that a given run emitted `run_finished` with the expected ids — observability as a testable property, not a hope.
 
 Swapping console for a real exporter is one new file that implements `emit`. The pipeline that produces the events doesn't move a line.
