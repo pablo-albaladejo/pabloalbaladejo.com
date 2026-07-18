@@ -92,3 +92,9 @@ If you want to run the same pass on your own project:
 - **Mirror your docs as Markdown** — per-page `.md` files plus a single full-corpus file a model can ingest in one fetch.
 - **List in the registries your audience and their agents browse** (the MCP registry, Glama, npm with honest homepages and keywords), and surface those listings on your own pages.
 - **For gatekept lists, substantiate the claim in your README and be honest about traction** — expect a substance-and-traction bar, and treat a "revisit once it improves" as a roadmap, not a rejection.
+
+## Related writing
+
+- [Evaluating LLM outputs in production](/blog/evaluating-llm-outputs-in-production) — the eval harness behind the product this case study optimized.
+- [Shipping production software with AI agents](/blog/shipping-production-software-with-ai-agents) — the workflow that shipped the whole GEO program in a day.
+- [Observability for LLM pipelines](/blog/observability-for-llm-pipelines) — instrumenting what your LLM systems actually do.

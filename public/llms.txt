@@ -14,14 +14,22 @@
 
 ## Writing
 
-- [Evaluating LLM outputs in production: 22 benchmarks, a 90% gate](https://pabloalbaladejo.com/blog/evaluating-llm-outputs-in-production): how I evaluate LLM structured output with a 22-benchmark eval harness, tiered assertions, and a hard 90% CI gate
-
-## Writing
-
+- [Evaluating LLM outputs in production: 22 benchmarks, a 90% gate](https://pabloalbaladejo.com/blog/evaluating-llm-outputs-in-production):
+  how I evaluate LLM structured output with a 22-benchmark eval harness,
+  tiered assertions, and a hard 90% CI gate
 - [Shipping production software with AI agents](https://pabloalbaladejo.com/blog/shipping-production-software-with-ai-agents):
   the system that lets AI agents ship production code — specs before code,
-  zero-tolerance CI as the reviewer, mechanical convention guards, and isolated
-  worktrees, grounded in the AI-built Kaiord codebase
+  zero-tolerance CI as the reviewer, mechanical convention guards, and
+  isolated worktrees, grounded in the AI-built Kaiord codebase
+- [Observability for LLM pipelines: from streams to sinks](https://pabloalbaladejo.com/blog/observability-for-llm-pipelines):
+  what observability means for LLM pipelines and why classic APM misses it —
+  deferred-flush streaming metrics, telemetry as a swappable sink (with real
+  code), and a pragmatic adoption path
+- [GEO: how AI agents find you — a same-day case study](https://pabloalbaladejo.com/blog/geo-how-ai-agents-find-you):
+  a mechanism-by-mechanism case study of optimizing kaiord.com for AI answer
+  engines in one day — llms.txt, robots rules for AI crawlers, structured
+  data, Markdown mirrors, and registries — with a link to every artifact
+- [RSS feed](https://pabloalbaladejo.com/rss.xml)
 
 ## Projects
 
@@ -31,21 +39,12 @@
 - [Deepgent](https://deepgent.net): multi-tenant SaaS platform giving
   companies a branded AI chatbot over their own curated knowledge base
   (embeddable widget, self-service portal, RAG on AWS Bedrock)
-
 - [trainingpeaks-sdk](https://github.com/pablo-albaladejo/trainingpeaks-sdk):
   TypeScript SDK for the TrainingPeaks platform
 - [streaming-lambda-ai-sdk](https://github.com/pablo-albaladejo/streaming-lambda-ai-sdk):
   structured LLM responses from Amazon Bedrock streamed through AWS Lambda
 - [tanita-to-garmin-cdk](https://github.com/pablo-albaladejo/tanita-to-garmin-cdk):
   serverless AWS app syncing body-composition data into Garmin Connect
-
-## Writing
-
-- [Observability for LLM pipelines: from streams to sinks](https://pabloalbaladejo.com/blog/observability-for-llm-pipelines):
-  what observability means for LLM pipelines and why classic APM misses it —
-  deferred-flush streaming metrics, telemetry as a swappable sink (with real
-  code), and a pragmatic adoption path.
-- [GEO: how AI agents find you — a same-day case study](https://pabloalbaladejo.com/blog/geo-how-ai-agents-find-you): a mechanism-by-mechanism case study of optimizing kaiord.com for AI answer engines in one day — llms.txt, robots rules for AI crawlers, structured data, Markdown mirrors, and registries — with a link to every artifact.
 
 ## Profiles
 

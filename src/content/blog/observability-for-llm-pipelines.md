@@ -93,3 +93,9 @@ You don't need a platform team or a tracing backend to start. In order:
 5. **Put the emission at the flush for anything streamed.** It's the one place the numbers are actually complete.
 
 Observability for LLM pipelines isn't a product you buy or a dashboard you stand up on day one. It's a seam you build early — a one-method port, a closed event set, and a flush in the right place — so that the day traffic arrives, you already know what your models are doing.
+
+## Related writing
+
+- [Evaluating LLM outputs in production](/blog/evaluating-llm-outputs-in-production) — the pre-deploy counterpart: evals gate what telemetry later observes.
+- [Shipping production software with AI agents](/blog/shipping-production-software-with-ai-agents) — the system that produced the telemetry port described here.
+- [GEO: how AI agents find you](/blog/geo-how-ai-agents-find-you) — making the systems you observe discoverable too.
