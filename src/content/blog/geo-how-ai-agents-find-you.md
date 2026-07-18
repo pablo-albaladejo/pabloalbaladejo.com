@@ -2,6 +2,7 @@
 title: "GEO: how AI agents find you — a same-day case study"
 description: "Generative engine optimization (GEO) is how AI answer engines like ChatGPT and Perplexity cite you. A same-day case study of the five mechanisms I shipped on kaiord.com — from llms.txt to registries."
 pubDate: 2026-07-18
+category: "GEO"
 faq:
   - q: "What is GEO (generative engine optimization)?"
     a: "GEO is the practice of making a site legible and citable to AI answer engines — ChatGPT, Perplexity, Claude, Google AI Overviews — rather than only to ranked search results. In practice it means machine-readable maps (llms.txt), permissive crawler rules, structured data, plain-text/markdown mirrors of your pages, and being listed in the registries agents browse."

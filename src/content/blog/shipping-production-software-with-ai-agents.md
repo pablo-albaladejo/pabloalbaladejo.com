@@ -2,6 +2,7 @@
 title: "Shipping production software with AI agents"
 description: "Can AI agents write production code? Yes, if the system around them enforces quality mechanically. The agentic development workflow that ships production software."
 pubDate: 2026-07-18
+category: "AGENTIC DEV"
 faq:
   - q: "Can AI agents write production code?"
     a: "Yes, when the system around them enforces quality mechanically. Specs before code, a zero-tolerance CI gate, and machine-checked conventions do the enforcing. On Kaiord every line was written by agents and it ships to npm; version 10.0.0 went out the day I published this."
