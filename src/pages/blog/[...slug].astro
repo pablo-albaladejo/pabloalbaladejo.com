@@ -1,0 +1,148 @@
+---
+import { getCollection, render } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+
+const site = "https://pabloalbaladejo.com";
+const pageUrl = `${site}/blog/${entry.id}`;
+
+const dateFmt = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+
+const articleJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Article",
+  headline: entry.data.title,
+  description: entry.data.description,
+  datePublished: entry.data.pubDate.toISOString(),
+  author: {
+    "@type": "Person",
+    name: "Pablo Albaladejo",
+    url: "https://pabloalbaladejo.com/",
+  },
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": pageUrl,
+  },
+});
+
+const faq = entry.data.faq;
+const faqJsonLd = faq
+  ? JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faq.map((item) => ({
+        "@type": "Question",
+        name: item.q,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: item.a,
+        },
+      })),
+    })
+  : null;
+
+const sources = entry.data.sources;
+---
+
+<Base
+  title={entry.data.title}
+  description={entry.data.description}
+  lang="en"
+  path={`/blog/${entry.id}`}
+  localized={false}
+>
+  <script
+    type="application/ld+json"
+    set:html={articleJsonLd}
+    slot="head"
+  />
+  {
+    faqJsonLd && (
+      <script
+        type="application/ld+json"
+        set:html={faqJsonLd}
+        slot="head"
+      />
+    )
+  }
+
+  <header class="mb-10">
+    <nav class="mb-10 flex items-center justify-between text-sm">
+      <a href="/" class="font-bold hover:text-slate-600">Pablo Albaladejo</a>
+      <a href="/blog" class="text-slate-500 hover:text-slate-800"
+        >All writing</a
+      >
+    </nav>
+    <h1 class="text-3xl font-extrabold tracking-tight">{entry.data.title}</h1>
+    <time
+      datetime={entry.data.pubDate.toISOString()}
+      class="mt-3 block text-sm text-slate-400"
+    >
+      {dateFmt.format(entry.data.pubDate)}
+    </time>
+  </header>
+
+  <main>
+    <article
+      class="space-y-4 [&_a]:underline [&_blockquote]:border-l-4 [&_blockquote]:border-slate-200 [&_blockquote]:pl-4 [&_blockquote]:text-slate-600 [&_code]:rounded [&_code]:bg-slate-100 [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-sm [&_h2]:mt-10 [&_h2]:text-xl [&_h2]:font-bold [&_h3]:mt-8 [&_h3]:text-lg [&_h3]:font-bold [&_li]:mt-1 [&_ol]:list-decimal [&_ol]:pl-6 [&_p]:text-slate-700 [&_pre]:overflow-x-auto [&_pre]:rounded [&_pre]:bg-slate-900 [&_pre]:p-4 [&_pre]:text-sm [&_pre]:text-slate-100 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-slate-100 [&_ul]:list-disc [&_ul]:pl-6"
+    >
+      <Content />
+    </article>
+
+    {
+      faq && (
+        <section class="mt-14">
+          <h2 class="mb-4 text-xl font-bold">FAQ</h2>
+          <dl class="space-y-5">
+            {faq.map((item) => (
+              <div>
+                <dt class="font-semibold text-slate-800">{item.q}</dt>
+                <dd class="mt-1 text-slate-600">{item.a}</dd>
+              </div>
+            ))}
+          </dl>
+        </section>
+      )
+    }
+
+    {
+      sources && sources.length > 0 && (
+        <section class="mt-14">
+          <h2 class="mb-4 text-xl font-bold">Sources &amp; proof</h2>
+          <ul class="space-y-2">
+            {sources.map((source) => (
+              <li>
+                <a
+                  href={source.href}
+                  class="underline decoration-slate-300 hover:decoration-slate-800"
+                >
+                  {source.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </section>
+      )
+    }
+
+    <hr class="mt-14 border-slate-200" />
+    <p class="mt-4 text-sm text-slate-400 italic">
+      Drafted by my agents, edited by me. Every claim links to a verifiable
+      artifact.
+    </p>
+  </main>
+</Base>

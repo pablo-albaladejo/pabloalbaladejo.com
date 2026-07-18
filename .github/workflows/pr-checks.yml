@@ -1,0 +1,72 @@
+name: PR checks
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - run: pnpm install --frozen-lockfile
+
+      - run: pnpm build
+
+      - name: Validate JSON-LD blocks
+        run: |
+          node <<'NODE'
+          const fs = require("fs");
+          const path = require("path");
+
+          function walk(dir) {
+            const out = [];
+            for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+              const p = path.join(dir, e.name);
+              if (e.isDirectory()) out.push(...walk(p));
+              else if (e.name.endsWith(".html")) out.push(p);
+            }
+            return out;
+          }
+
+          const re =
+            /<script[^>]*type=["']application\/ld\+json["'][^>]*>([\s\S]*?)<\/script>/gi;
+
+          const files = fs.existsSync("dist") ? walk("dist") : [];
+          let blocks = 0;
+          let failed = 0;
+
+          for (const file of files) {
+            const html = fs.readFileSync(file, "utf8");
+            let m;
+            while ((m = re.exec(html)) !== null) {
+              blocks++;
+              const raw = m[1].trim();
+              try {
+                JSON.parse(raw);
+              } catch (err) {
+                failed++;
+                console.error(`✗ Invalid JSON-LD in ${file}: ${err.message}`);
+                console.error(raw.slice(0, 300));
+              }
+            }
+          }
+
+          console.log(
+            `Checked ${files.length} HTML file(s), ${blocks} JSON-LD block(s), ${failed} invalid.`,
+          );
+          if (failed > 0) process.exit(1);
+          NODE
