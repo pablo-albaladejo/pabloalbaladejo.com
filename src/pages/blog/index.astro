@@ -1,0 +1,62 @@
+---
+import { getCollection } from "astro:content";
+import Base from "../../layouts/Base.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
+);
+
+const dateFmt = new Intl.DateTimeFormat("en-US", {
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+---
+
+<Base
+  title="Writing — Pablo Albaladejo"
+  description="Essays on building production software with AI agents: LLM evals, GEO, agentic development, and observability. Every claim links to a verifiable artifact."
+  lang="en"
+  path="/blog"
+  localized={false}
+>
+  <header class="mb-12">
+    <nav class="mb-10 flex items-center justify-between text-sm">
+      <a href="/" class="font-bold hover:text-slate-600">Pablo Albaladejo</a>
+    </nav>
+    <h1 class="text-3xl font-extrabold tracking-tight">Writing</h1>
+    <p class="mt-4 text-slate-600">
+      Notes on building production software with AI agents — LLM evals, GEO,
+      agentic development, and observability. Every claim links to a
+      verifiable artifact.
+    </p>
+  </header>
+
+  <main>
+    {
+      posts.length === 0 ? (
+        <p class="text-slate-500">No posts yet. Check back soon.</p>
+      ) : (
+        <ul class="space-y-8">
+          {posts.map((post) => (
+            <li>
+              <a
+                href={`/blog/${post.id}`}
+                class="text-xl font-bold underline decoration-slate-300 hover:decoration-slate-800"
+              >
+                {post.data.title}
+              </a>
+              <p class="mt-1 text-slate-600">{post.data.description}</p>
+              <time
+                datetime={post.data.pubDate.toISOString()}
+                class="mt-1 block text-sm text-slate-400"
+              >
+                {dateFmt.format(post.data.pubDate)}
+              </time>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </main>
+</Base>

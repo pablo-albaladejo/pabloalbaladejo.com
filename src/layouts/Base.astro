@@ -6,9 +6,10 @@ type Props = {
   description: string;
   lang: "en" | "es";
   path: string;
+  localized?: boolean;
 };
 
-const { title, description, lang, path } = Astro.props;
+const { title, description, lang, path, localized = true } = Astro.props;
 const site = "https://pabloalbaladejo.com";
 const umamiId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 const enPath = path.startsWith("/es") ? path.replace(/^\/es\/?/, "/") : path;
@@ -26,11 +27,36 @@ const esPath = path.startsWith("/es")
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={`${site}${path}`} />
-    <link rel="alternate" hreflang="en" href={`${site}${enPath}`} />
-    <link rel="alternate" hreflang="es" href={`${site}${esPath}`} />
-    <link rel="alternate" hreflang="x-default" href={`${site}${enPath}`} />
+    {
+      localized ? (
+        <>
+          <link rel="alternate" hreflang="en" href={`${site}${enPath}`} />
+          <link rel="alternate" hreflang="es" href={`${site}${esPath}`} />
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={`${site}${enPath}`}
+          />
+        </>
+      ) : (
+        <>
+          <link rel="alternate" hreflang="en" href={`${site}${path}`} />
+          <link
+            rel="alternate"
+            hreflang="x-default"
+            href={`${site}${path}`}
+          />
+        </>
+      )
+    }
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="Pablo Albaladejo"
+      href="/rss.xml"
+    />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={`${site}${path}`} />
