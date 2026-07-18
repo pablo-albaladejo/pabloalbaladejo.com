@@ -73,3 +73,9 @@ If you're wiring evals around your own LLM output, this is the shape I'd reach f
 - **Include ambiguous and adversarial cases, and accept they'll flap.** They're what keeps the suite honest — and the reason the gate isn't 100%.
 
 None of this is exotic. It's a fixtures file, a hundred lines of assertions, a reporter, and one comparison against a number. The discipline isn't in the code; it's in refusing to ship structured LLM output that nothing checks.
+
+## Related writing
+
+- [Shipping production software with AI agents](/blog/shipping-production-software-with-ai-agents) — the operating system around the agents that built this harness.
+- [Observability for LLM pipelines](/blog/observability-for-llm-pipelines) — evals catch regressions before deploy; telemetry catches them after.
+- [GEO: how AI agents find you](/blog/geo-how-ai-agents-find-you) — the discoverability side of shipping AI products.

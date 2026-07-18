@@ -84,3 +84,9 @@ If you want to run software this way, this is the shortest honest version of wha
 6. **Make the human gate a merge, not a rubber stamp.** Delegate correctness to the machine; keep intent, taste, and the final yes for yourself.
 
 The unfashionable truth is that "shipping production software with AI agents" is mostly a systems-design problem, not a prompting problem. The agents are capable. Whether they ship something you'd put your name on comes down to how much of your judgment you managed to encode into machines that check their work — and how honest you are about the parts you still have to do yourself.
+
+## Related writing
+
+- [Evaluating LLM outputs in production](/blog/evaluating-llm-outputs-in-production) — the eval gate is one of the mechanical guards this system relies on.
+- [Observability for LLM pipelines](/blog/observability-for-llm-pipelines) — what production means once the agents' code is live.
+- [GEO: how AI agents find you](/blog/geo-how-ai-agents-find-you) — a full day of this workflow, documented mechanism by mechanism.
