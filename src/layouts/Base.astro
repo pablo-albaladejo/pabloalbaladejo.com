@@ -79,5 +79,18 @@ const navActive = "text-ink border-b-2 border-accent pb-0.5 no-underline";
       </nav>
     </header>
     <slot />
+    <script is:inline>
+      // Assemble mailto links at runtime so the address never appears in the
+      // static HTML (harvester bots don't run JS). Falls back to the href in
+      // markup (LinkedIn) when JS is off.
+      document
+        .querySelectorAll("[data-email][data-domain]")
+        .forEach((el) => {
+          let href = "mailto:" + el.dataset.email + "@" + el.dataset.domain;
+          if (el.dataset.subject)
+            href += "?subject=" + encodeURIComponent(el.dataset.subject);
+          el.setAttribute("href", href);
+        });
+    </script>
   </body>
 </html>
