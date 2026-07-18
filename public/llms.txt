@@ -9,6 +9,19 @@
 
 - [Home](https://pabloalbaladejo.com/): positioning and projects, in English
 - [Home (Spanish)](https://pabloalbaladejo.com/es): the same, in Spanish
+- [Talks](https://pabloalbaladejo.com/talks): speaker bio, talk abstracts,
+  and booking (agentic development, LLM evals, GEO), in English
+
+## Writing
+
+- [Evaluating LLM outputs in production: 22 benchmarks, a 90% gate](https://pabloalbaladejo.com/blog/evaluating-llm-outputs-in-production): how I evaluate LLM structured output with a 22-benchmark eval harness, tiered assertions, and a hard 90% CI gate
+
+## Writing
+
+- [Shipping production software with AI agents](https://pabloalbaladejo.com/blog/shipping-production-software-with-ai-agents):
+  the system that lets AI agents ship production code — specs before code,
+  zero-tolerance CI as the reviewer, mechanical convention guards, and isolated
+  worktrees, grounded in the AI-built Kaiord codebase
 
 ## Projects
 
@@ -32,6 +45,7 @@
   what observability means for LLM pipelines and why classic APM misses it —
   deferred-flush streaming metrics, telemetry as a swappable sink (with real
   code), and a pragmatic adoption path.
+- [GEO: how AI agents find you — a same-day case study](https://pabloalbaladejo.com/blog/geo-how-ai-agents-find-you): a mechanism-by-mechanism case study of optimizing kaiord.com for AI answer engines in one day — llms.txt, robots rules for AI crawlers, structured data, Markdown mirrors, and registries — with a link to every artifact.
 
 ## Profiles
 
