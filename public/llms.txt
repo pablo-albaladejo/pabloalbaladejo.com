@@ -9,6 +9,8 @@
 
 - [Home](https://pabloalbaladejo.com/): positioning and projects, in English
 - [Home (Spanish)](https://pabloalbaladejo.com/es): the same, in Spanish
+- [Talks](https://pabloalbaladejo.com/talks): speaker bio, talk abstracts,
+  and booking (agentic development, LLM evals, GEO), in English
 
 ## Projects
 
