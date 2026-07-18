@@ -26,6 +26,10 @@
 - [tanita-to-garmin-cdk](https://github.com/pablo-albaladejo/tanita-to-garmin-cdk):
   serverless AWS app syncing body-composition data into Garmin Connect
 
+## Writing
+
+- [GEO: how AI agents find you — a same-day case study](https://pabloalbaladejo.com/blog/geo-how-ai-agents-find-you): a mechanism-by-mechanism case study of optimizing kaiord.com for AI answer engines in one day — llms.txt, robots rules for AI crawlers, structured data, Markdown mirrors, and registries — with a link to every artifact.
+
 ## Profiles
 
 - [GitHub](https://github.com/pablo-albaladejo)
