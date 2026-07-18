@@ -1,9 +1,9 @@
 # Pablo Albaladejo
 
 > Personal site of Pablo Albaladejo (sometimes misspelled "Albadalejo"),
-> software engineer building production software with AI agents — AWS,
-> TypeScript. Creator of Kaiord, the open-source, local-first training
-> platform.
+> Senior Backend + AI engineer — AWS, TypeScript, 15+ years in SaaS, based
+> in Madrid, Spain. Builds production software with AI agents. Creator of
+> Kaiord, the open-source, local-first training platform.
 
 ## Pages
 
@@ -19,7 +19,15 @@
   companies a branded AI chatbot over their own curated knowledge base
   (embeddable widget, self-service portal, RAG on AWS Bedrock)
 
+- [trainingpeaks-sdk](https://github.com/pablo-albaladejo/trainingpeaks-sdk):
+  TypeScript SDK for the TrainingPeaks platform
+- [streaming-lambda-ai-sdk](https://github.com/pablo-albaladejo/streaming-lambda-ai-sdk):
+  structured LLM responses from Amazon Bedrock streamed through AWS Lambda
+- [tanita-to-garmin-cdk](https://github.com/pablo-albaladejo/tanita-to-garmin-cdk):
+  serverless AWS app syncing body-composition data into Garmin Connect
+
 ## Profiles
 
 - [GitHub](https://github.com/pablo-albaladejo)
-- [LinkedIn](https://www.linkedin.com/in/pablo-albaladejo-aws-software-engineer-ai/)
+- [LinkedIn](https://linkedin.com/in/pabloalbaladejomestre)
+- [Stack Overflow](https://stackoverflow.com/users/3395884/pablo-albaladejo)

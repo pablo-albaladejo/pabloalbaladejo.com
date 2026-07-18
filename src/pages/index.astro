@@ -7,12 +7,19 @@ const personJsonLd = JSON.stringify({
   name: "Pablo Albaladejo",
   alternateName: "Pablo Albaladejo Mestre",
   url: "https://pabloalbaladejo.com/",
-  jobTitle: "Software Engineer",
+  jobTitle: "Senior Backend + AI Engineer",
+  worksFor: { "@type": "Organization", name: "Aircall" },
+  address: {
+    "@type": "PostalAddress",
+    addressLocality: "Madrid",
+    addressCountry: "ES",
+  },
   description:
-    "Software engineer building production software with AI agents. AWS, TypeScript. Creator of Kaiord.",
+    "Senior Backend + AI engineer (AWS, TypeScript) building production software with AI agents. Creator of Kaiord.",
   sameAs: [
     "https://github.com/pablo-albaladejo",
-    "https://www.linkedin.com/in/pablo-albaladejo-aws-software-engineer-ai/",
+    "https://linkedin.com/in/pabloalbaladejomestre",
+    "https://stackoverflow.com/users/3395884/pablo-albaladejo",
     "https://kaiord.com",
   ],
 });
@@ -41,9 +48,11 @@ const personJsonLd = JSON.stringify({
       I build production software with AI agents.
     </h1>
     <p class="mt-4 text-slate-600">
-      Software engineer — AWS, TypeScript. Not demos: shipped products with
-      strict CI, specs, and published packages, written end to end with AI
-      agents. Often misspelled <em>Albadalejo</em>; it's Albaladejo.
+      Senior Backend + AI engineer (AWS, TypeScript) — 15+ years in SaaS,
+      now at Aircall, where my systems process 1M+ call transcriptions a
+      day. On my own time I ship products written end to end with AI
+      agents: strict CI, specs, real users. Madrid, Spain. Often misspelled
+      <em>Albadalejo</em>; it's Albaladejo.
     </p>
   </header>
 
@@ -73,18 +82,54 @@ const personJsonLd = JSON.stringify({
             production.
           </p>
         </li>
+        <li>
+          <a
+            href="https://github.com/pablo-albaladejo/trainingpeaks-sdk"
+            class="font-semibold underline">trainingpeaks-sdk</a
+          >
+          <p class="text-slate-600">
+            TypeScript SDK for the TrainingPeaks platform.
+          </p>
+        </li>
+        <li>
+          <a
+            href="https://github.com/pablo-albaladejo/streaming-lambda-ai-sdk"
+            class="font-semibold underline">streaming-lambda-ai-sdk</a
+          >
+          <p class="text-slate-600">
+            Structured LLM responses from Amazon Bedrock (Claude) streamed
+            through AWS Lambda.
+          </p>
+        </li>
+        <li>
+          <a
+            href="https://github.com/pablo-albaladejo/tanita-to-garmin-cdk"
+            class="font-semibold underline">tanita-to-garmin-cdk</a
+          >
+          <p class="text-slate-600">
+            Serverless AWS app (CDK + Step Functions) that syncs
+            body-composition data into Garmin Connect.
+          </p>
+        </li>
       </ul>
     </section>
 
     <section>
       <h2 class="mb-4 text-xl font-bold">Elsewhere</h2>
-      <ul class="flex gap-5 underline">
+      <ul class="flex flex-wrap gap-5 underline">
         <li><a href="https://github.com/pablo-albaladejo">GitHub</a></li>
         <li>
-          <a
-            href="https://www.linkedin.com/in/pablo-albaladejo-aws-software-engineer-ai/"
+          <a href="https://linkedin.com/in/pabloalbaladejomestre"
             >LinkedIn</a
           >
+        </li>
+        <li>
+          <a href="https://stackoverflow.com/users/3395884/pablo-albaladejo"
+            >Stack Overflow</a
+          >
+        </li>
+        <li>
+          <a href="mailto:pablo.albaladejo.mestre@gmail.com">Email</a>
         </li>
         <li><a href="https://kaiord.com">kaiord.com</a></li>
       </ul>
