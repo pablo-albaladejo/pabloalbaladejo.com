@@ -6,11 +6,7 @@ const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
 );
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-});
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
 ---
 
 <Base
@@ -18,45 +14,45 @@ const dateFmt = new Intl.DateTimeFormat("en-US", {
   description="Essays on building production software with AI agents: LLM evals, GEO, agentic development, and observability. Every claim links to a verifiable artifact."
   lang="en"
   path="/blog"
-  localized={false}
+  active="writing"
 >
-  <header class="mb-12">
-    <nav class="mb-10 flex items-center justify-between text-sm">
-      <a href="/" class="font-bold hover:text-slate-600">Pablo Albaladejo</a>
-    </nav>
-    <h1 class="text-3xl font-extrabold tracking-tight">Writing</h1>
-    <p class="mt-4 text-slate-600">
+  <main class="mx-auto max-w-[70ch] pt-16 pb-24 min-[700px]:pt-[88px]">
+    <h1
+      class="mb-6 text-[38px] leading-[1.1] font-bold tracking-[-0.02em] text-pretty min-[700px]:text-[48px]"
+    >
+      Writing
+    </h1>
+    <p class="text-[19px] leading-[1.7] text-body text-pretty">
       Notes on building production software with AI agents — LLM evals, GEO,
       agentic development, and observability. Every claim links to a
       verifiable artifact.
     </p>
-  </header>
 
-  <main>
-    {
-      posts.length === 0 ? (
-        <p class="text-slate-500">No posts yet. Check back soon.</p>
-      ) : (
-        <ul class="space-y-8">
-          {posts.map((post) => (
-            <li>
+    <section class="mt-16">
+      {
+        posts.length === 0 ? (
+          <p class="text-muted">No posts yet. Check back soon.</p>
+        ) : (
+          posts.map((post, i) => (
+            <div
+              class:list={[
+                "flex items-baseline justify-between gap-6 border-t border-line py-5",
+                i === posts.length - 1 && "border-b",
+              ]}
+            >
               <a
                 href={`/blog/${post.id}`}
-                class="text-xl font-bold underline decoration-slate-300 hover:decoration-slate-800"
+                class="text-[19px] font-bold text-ink no-underline text-pretty hover:underline"
               >
                 {post.data.title}
               </a>
-              <p class="mt-1 text-slate-600">{post.data.description}</p>
-              <time
-                datetime={post.data.pubDate.toISOString()}
-                class="mt-1 block text-sm text-slate-400"
-              >
-                {dateFmt.format(post.data.pubDate)}
-              </time>
-            </li>
-          ))}
-        </ul>
-      )
-    }
+              <span class="font-mono text-[12.5px] whitespace-nowrap text-faint">
+                {fmt(post.data.pubDate)}
+              </span>
+            </div>
+          ))
+        )
+      }
+    </section>
   </main>
 </Base>

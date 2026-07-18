@@ -16,11 +16,11 @@ const { Content } = await render(entry);
 const site = "https://pabloalbaladejo.com";
 const pageUrl = `${site}/blog/${entry.id}`;
 
-const dateFmt = new Intl.DateTimeFormat("en-US", {
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-});
+const isoDate = entry.data.pubDate.toISOString().slice(0, 10);
+const minutes = Math.max(
+  1,
+  Math.round(entry.body.split(/\s+/).length / 220),
+);
 
 const articleJsonLd = JSON.stringify({
   "@context": "https://schema.org",
@@ -56,6 +56,7 @@ const faqJsonLd = faq
   : null;
 
 const sources = entry.data.sources;
+const category = entry.data.category;
 ---
 
 <Base
@@ -63,7 +64,7 @@ const sources = entry.data.sources;
   description={entry.data.description}
   lang="en"
   path={`/blog/${entry.id}`}
-  localized={false}
+  active="writing"
 >
   <script
     type="application/ld+json"
@@ -80,38 +81,42 @@ const sources = entry.data.sources;
     )
   }
 
-  <header class="mb-10">
-    <nav class="mb-10 flex items-center justify-between text-sm">
-      <a href="/" class="font-bold hover:text-slate-600">Pablo Albaladejo</a>
-      <a href="/blog" class="text-slate-500 hover:text-slate-800"
-        >All writing</a
+  <main class="mx-auto max-w-[70ch] pt-16 pb-24 min-[700px]:pt-[88px]">
+    <header>
+      <p class="mb-5 font-mono text-[12.5px] text-faint">
+        {category && <span class="text-accent">{category}</span>}
+        {category && <span> · </span>}
+        <time datetime={entry.data.pubDate.toISOString()}>{isoDate}</time>
+        <span> · </span>
+        {minutes} min read
+      </p>
+      <h1
+        class="text-[34px] leading-[1.15] font-bold tracking-[-0.015em] text-pretty min-[700px]:text-[44px]"
       >
-    </nav>
-    <h1 class="text-3xl font-extrabold tracking-tight">{entry.data.title}</h1>
-    <time
-      datetime={entry.data.pubDate.toISOString()}
-      class="mt-3 block text-sm text-slate-400"
-    >
-      {dateFmt.format(entry.data.pubDate)}
-    </time>
-  </header>
+        {entry.data.title}
+      </h1>
+      <p
+        class="mt-6 border-b border-line pb-8 text-[21px] leading-[1.55] text-muted italic text-pretty"
+      >
+        {entry.data.description}
+      </p>
+    </header>
 
-  <main>
-    <article
-      class="space-y-4 [&_a]:underline [&_blockquote]:border-l-4 [&_blockquote]:border-slate-200 [&_blockquote]:pl-4 [&_blockquote]:text-slate-600 [&_code]:rounded [&_code]:bg-slate-100 [&_code]:px-1 [&_code]:py-0.5 [&_code]:text-sm [&_h2]:mt-10 [&_h2]:text-xl [&_h2]:font-bold [&_h3]:mt-8 [&_h3]:text-lg [&_h3]:font-bold [&_li]:mt-1 [&_ol]:list-decimal [&_ol]:pl-6 [&_p]:text-slate-700 [&_pre]:overflow-x-auto [&_pre]:rounded [&_pre]:bg-slate-900 [&_pre]:p-4 [&_pre]:text-sm [&_pre]:text-slate-100 [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-slate-100 [&_ul]:list-disc [&_ul]:pl-6"
-    >
+    <article class="prose-article mt-10">
       <Content />
     </article>
 
     {
       faq && (
-        <section class="mt-14">
-          <h2 class="mb-4 text-xl font-bold">FAQ</h2>
-          <dl class="space-y-5">
+        <section class="mt-16">
+          <h2 class="mb-6 font-mono text-[15px] font-semibold tracking-[0.08em] text-faint">
+            FAQ
+          </h2>
+          <dl class="space-y-7">
             {faq.map((item) => (
               <div>
-                <dt class="font-semibold text-slate-800">{item.q}</dt>
-                <dd class="mt-1 text-slate-600">{item.a}</dd>
+                <dt class="text-[18.5px] font-bold text-ink">{item.q}</dt>
+                <dd class="mt-2 text-body">{item.a}</dd>
               </div>
             ))}
           </dl>
@@ -121,14 +126,19 @@ const sources = entry.data.sources;
 
     {
       sources && sources.length > 0 && (
-        <section class="mt-14">
-          <h2 class="mb-4 text-xl font-bold">Sources &amp; proof</h2>
-          <ul class="space-y-2">
-            {sources.map((source) => (
-              <li>
+        <section class="mt-16">
+          <h2 class="mb-6 font-mono text-[15px] font-semibold tracking-[0.08em] text-faint">
+            SOURCES &amp; PROOF
+          </h2>
+          <ul class="space-y-3">
+            {sources.map((source, i) => (
+              <li class="flex gap-3">
+                <span class="font-mono text-accent">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
                 <a
                   href={source.href}
-                  class="underline decoration-slate-300 hover:decoration-slate-800"
+                  class="text-accent no-underline hover:underline"
                 >
                   {source.label}
                 </a>
@@ -139,10 +149,17 @@ const sources = entry.data.sources;
       )
     }
 
-    <hr class="mt-14 border-slate-200" />
-    <p class="mt-4 text-sm text-slate-400 italic">
-      Drafted by my agents, edited by me. Every claim links to a verifiable
-      artifact.
-    </p>
+    <footer
+      class="mt-16 flex flex-wrap items-center justify-between gap-4 border-t border-line pt-6"
+    >
+      <span class="font-mono text-[12.5px] text-faint">
+        Drafted by my agents, edited by me.
+      </span>
+      <a
+        href="/blog"
+        class="font-mono text-[12.5px] text-accent no-underline hover:underline"
+        >← All writing</a
+      >
+    </footer>
   </main>
 </Base>

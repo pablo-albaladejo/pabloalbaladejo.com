@@ -4,18 +4,16 @@ import "../styles/global.css";
 type Props = {
   title: string;
   description: string;
-  lang: "en" | "es";
+  lang?: "en";
   path: string;
-  localized?: boolean;
+  active?: "writing" | "talks";
 };
 
-const { title, description, lang, path, localized = true } = Astro.props;
+const { title, description, lang = "en", path, active } = Astro.props;
 const site = "https://pabloalbaladejo.com";
 const umamiId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
-const enPath = path.startsWith("/es") ? path.replace(/^\/es\/?/, "/") : path;
-const esPath = path.startsWith("/es")
-  ? path
-  : `/es${path === "/" ? "" : path}`;
+const navLink = "text-muted hover:text-ink no-underline";
+const navActive = "text-ink border-b-2 border-accent pb-0.5 no-underline";
 ---
 
 <!doctype html>
@@ -27,28 +25,8 @@ const esPath = path.startsWith("/es")
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
     <link rel="canonical" href={`${site}${path}`} />
-    {
-      localized ? (
-        <>
-          <link rel="alternate" hreflang="en" href={`${site}${enPath}`} />
-          <link rel="alternate" hreflang="es" href={`${site}${esPath}`} />
-          <link
-            rel="alternate"
-            hreflang="x-default"
-            href={`${site}${enPath}`}
-          />
-        </>
-      ) : (
-        <>
-          <link rel="alternate" hreflang="en" href={`${site}${path}`} />
-          <link
-            rel="alternate"
-            hreflang="x-default"
-            href={`${site}${path}`}
-          />
-        </>
-      )
-    }
+    <link rel="alternate" hreflang="en" href={`${site}${path}`} />
+    <link rel="alternate" hreflang="x-default" href={`${site}${path}`} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link
@@ -62,10 +40,7 @@ const esPath = path.startsWith("/es")
     <meta property="og:url" content={`${site}${path}`} />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Pablo Albaladejo" />
-    <meta
-      property="og:locale"
-      content={lang === "es" ? "es_ES" : "en_US"}
-    />
+    <meta property="og:locale" content="en_US" />
     {
       umamiId && (
         <script
@@ -78,9 +53,31 @@ const esPath = path.startsWith("/es")
     }
     <slot name="head" />
   </head>
-  <body
-    class="mx-auto max-w-2xl bg-white px-6 py-12 font-sans leading-relaxed text-slate-800 antialiased"
-  >
+  <body class="mx-auto max-w-[1100px] px-6 min-[700px]:px-8">
+    <header
+      class="flex items-center justify-between border-b border-line py-7"
+    >
+      <a href="/" class="flex items-center gap-3 text-ink no-underline">
+        <span
+          class="box-border inline-flex h-[34px] w-[34px] items-end justify-center rounded-[7px] bg-ink pb-1.5 font-serif text-[19px] leading-none font-semibold text-paper dark:bg-[#26241e]"
+          aria-hidden="true"
+          >pa<span
+            class="mb-px ml-px inline-block h-[3px] w-[5px] bg-accent-br"
+          ></span></span
+        >
+        <span class="text-[17px] font-semibold tracking-[-0.01em]"
+          >Pablo Albaladejo</span
+        >
+      </a>
+      <nav class="flex items-center gap-7 font-mono text-[13px]">
+        <a href="/blog" class={active === "writing" ? navActive : navLink}
+          >Writing</a
+        >
+        <a href="/talks" class={active === "talks" ? navActive : navLink}
+          >Talks</a
+        >
+      </nav>
+    </header>
     <slot />
   </body>
 </html>

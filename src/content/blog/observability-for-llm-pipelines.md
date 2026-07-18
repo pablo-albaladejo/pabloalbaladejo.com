@@ -2,6 +2,7 @@
 title: "Observability for LLM pipelines: from streams to sinks"
 description: "A practical guide to LLM observability: how to monitor LLM pipelines in production when classic APM misses streaming and agents — telemetry as a swappable sink, deferred-flush metrics, and real code."
 pubDate: 2026-07-18
+category: "OBSERVABILITY"
 faq:
   - q: "How is LLM observability different from normal APM?"
     a: "Classic APM measures the request/response lifecycle: span duration, p99 latency, error rate. Two things break that model for LLMs. First, the call streams, so the response isn't finished when the HTTP response returns — the signals you actually want (total tokens, finish reason, end-to-end latency) only exist after the last chunk. Second, the payloads you'd instinctively log — prompts and completions — are exactly the ones you must not, because they carry user data. LLM observability is about capturing identifiers, versions and metrics, deferred to stream completion, behind an interface you can swap."

@@ -2,6 +2,7 @@
 title: "Evaluating LLM outputs in production: 22 benchmarks, a 90% gate"
 description: "How I evaluate LLM outputs in production: a 22-benchmark eval harness with tiered assertions and a hard 90% CI gate that fails the build on regressions."
 pubDate: 2026-07-18
+category: "LLM EVALS"
 faq:
   - q: "What is an LLM eval harness?"
     a: "A set of fixed input cases, a set of assertions that check each generated output against machine-verifiable expectations, and a single pass/fail gate wired into CI. It turns 'the model feels worse today' into a red build with a specific failing case and error message."

@@ -1,5 +1,10 @@
 ---
+import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
+
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 
 const personJsonLd = JSON.stringify({
   "@context": "https://schema.org",
@@ -15,7 +20,7 @@ const personJsonLd = JSON.stringify({
     addressCountry: "ES",
   },
   description:
-    "Senior Backend + AI engineer (AWS, TypeScript) building production software with AI agents. Creator of Kaiord.",
+    "Senior Backend + AI engineer (AWS, TypeScript) building production software with AI agents. LLM evals, monitoring and observability. Creator of Kaiord.",
   knowsAbout: [
     "AI agents",
     "LLM evaluation",
@@ -31,11 +36,46 @@ const personJsonLd = JSON.stringify({
     "https://kaiord.com",
   ],
 });
+
+const projects = [
+  {
+    name: "Kaiord",
+    href: "https://kaiord.com",
+    flagship: true,
+    blurb:
+      "Open-source, local-first training platform: calendar, AI assistant, Garmin & WHOOP sync, plus a TypeScript SDK, CLI, and MCP server for FIT, TCX, ZWO, and Garmin Connect files. Every line written by AI agents.",
+  },
+  {
+    name: "Deepgent",
+    href: "https://deepgent.net",
+    blurb:
+      "Multi-tenant SaaS: branded AI chatbot over a curated knowledge base — embeddable widget, self-service portal, RAG on AWS Bedrock. Live in production.",
+  },
+  {
+    name: "trainingpeaks-sdk",
+    href: "https://github.com/pablo-albaladejo/trainingpeaks-sdk",
+    blurb: "TypeScript SDK for the TrainingPeaks platform.",
+  },
+  {
+    name: "streaming-lambda-ai-sdk",
+    href: "https://github.com/pablo-albaladejo/streaming-lambda-ai-sdk",
+    blurb:
+      "Structured LLM responses from Amazon Bedrock (Claude) streamed through AWS Lambda.",
+  },
+  {
+    name: "tanita-to-garmin-cdk",
+    href: "https://github.com/pablo-albaladejo/tanita-to-garmin-cdk",
+    blurb:
+      "Serverless AWS app (CDK + Step Functions) syncing body-composition data into Garmin Connect.",
+  },
+];
+
+const fmt = (d: Date) => d.toISOString().slice(0, 10);
 ---
 
 <Base
   title="Pablo Albaladejo — I build production software with AI agents"
-  description="Software engineer (AWS, TypeScript) building production software with AI agents — with LLM evals, monitoring, and observability. Creator of Kaiord, the open-source local-first training platform."
+  description="Senior Backend + AI engineer (AWS, TypeScript) building production software with AI agents — LLM evals, monitoring & observability. Creator of Kaiord."
   lang="en"
   path="/"
 >
@@ -45,111 +85,127 @@ const personJsonLd = JSON.stringify({
     slot="head"
   />
 
-  <header class="mb-12">
-    <nav class="mb-10 flex items-center justify-between text-sm">
-      <span class="font-bold">Pablo Albaladejo</span>
-      <div class="flex gap-5">
-        <a href="/blog" class="text-slate-500 hover:text-slate-800"
-          >Writing</a
-        >
-        <a href="/talks" class="text-slate-500 hover:text-slate-800"
-          >Talks</a
-        >
-        <a href="/es" lang="es" class="text-slate-500 hover:text-slate-800"
-          >Español</a
-        >
-      </div>
-    </nav>
-    <h1 class="text-3xl font-extrabold tracking-tight">
-      I build production software with AI agents.
+  <main class="mx-auto max-w-[70ch] pt-16 min-[700px]:pt-[88px]">
+    <h1
+      class="mb-7 text-[38px] leading-[1.1] font-bold tracking-[-0.02em] text-pretty min-[700px]:text-[52px]"
+    >
+      I build production software with AI&nbsp;agents.
     </h1>
-    <p class="mt-4 text-slate-600">
+    <p class="text-[19px] leading-[1.7] text-body text-pretty">
       Senior Backend + AI engineer (AWS, TypeScript) — 15+ years in SaaS,
-      now at Aircall, where my systems process 1M+ call transcriptions a
-      day. On my own time I ship products written end to end with AI
-      agents: strict CI, specs, real users, and the LLM evals, monitoring &amp;
-      observability that keep them honest. Madrid, Spain. Often misspelled
-      <em>Albadalejo</em>; it's Albaladejo.
+      now at Aircall, where my systems process
+      <strong class="text-ink">1M+ call transcriptions a day</strong>. On my
+      own time I ship products written end to end with AI agents: strict
+      CI, specs, real users, and the LLM evals, monitoring &amp;
+      observability that keep them honest. Madrid, Spain.
     </p>
-  </header>
+    <p class="mt-6 font-mono text-[13px] text-faint">
+      Often misspelled
+      <span class="line-through decoration-accent">Albadalejo</span>; it's
+      Albaladejo.
+    </p>
 
-  <main>
-    <section class="mb-12">
-      <h2 class="mb-4 text-xl font-bold">Projects</h2>
-      <ul class="space-y-5">
-        <li>
-          <a href="https://kaiord.com" class="font-semibold underline"
-            >Kaiord</a
+    <section class="mt-20">
+      <h2
+        class="mb-2 font-mono text-[15px] font-semibold tracking-[0.08em] text-faint"
+      >
+        PROJECTS
+      </h2>
+      {
+        projects.map((p, i) => (
+          <div
+            class:list={[
+              "grid gap-2.5 border-t border-line py-6",
+              i === projects.length - 1 && "border-b",
+            ]}
           >
-          <p class="text-slate-600">
-            Open-source, local-first training platform: calendar, AI
-            assistant, Garmin &amp; WHOOP sync, plus a TypeScript SDK, CLI,
-            and MCP server for FIT, TCX, ZWO, and Garmin Connect files.
-            Every line written by AI agents.
-          </p>
-        </li>
-        <li>
-          <a href="https://deepgent.net" class="font-semibold underline"
-            >Deepgent</a
-          >
-          <p class="text-slate-600">
-            Multi-tenant SaaS platform that gives companies a branded AI
-            chatbot over their own curated knowledge base: embeddable
-            widget, self-service portal, RAG on AWS Bedrock. Live in
-            production.
-          </p>
-        </li>
-        <li>
-          <a
-            href="https://github.com/pablo-albaladejo/trainingpeaks-sdk"
-            class="font-semibold underline">trainingpeaks-sdk</a
-          >
-          <p class="text-slate-600">
-            TypeScript SDK for the TrainingPeaks platform.
-          </p>
-        </li>
-        <li>
-          <a
-            href="https://github.com/pablo-albaladejo/streaming-lambda-ai-sdk"
-            class="font-semibold underline">streaming-lambda-ai-sdk</a
-          >
-          <p class="text-slate-600">
-            Structured LLM responses from Amazon Bedrock (Claude) streamed
-            through AWS Lambda.
-          </p>
-        </li>
-        <li>
-          <a
-            href="https://github.com/pablo-albaladejo/tanita-to-garmin-cdk"
-            class="font-semibold underline">tanita-to-garmin-cdk</a
-          >
-          <p class="text-slate-600">
-            Serverless AWS app (CDK + Step Functions) that syncs
-            body-composition data into Garmin Connect.
-          </p>
-        </li>
-      </ul>
+            <div class="flex flex-wrap items-baseline gap-3">
+              <a
+                href={p.href}
+                class:list={[
+                  "font-bold tracking-[-0.01em] text-ink no-underline hover:underline",
+                  p.flagship ? "text-2xl" : "text-[19px]",
+                ]}
+              >
+                {p.name}
+              </a>
+              {p.flagship && (
+                <span class="rounded-full border border-line-2 px-2.5 py-0.5 font-mono text-[11.5px] text-accent">
+                  FLAGSHIP
+                </span>
+              )}
+            </div>
+            <p class="m-0 text-[16px] leading-[1.65] text-body text-pretty">
+              {p.blurb}
+            </p>
+          </div>
+        ))
+      }
     </section>
 
-    <section>
-      <h2 class="mb-4 text-xl font-bold">Elsewhere</h2>
-      <ul class="flex flex-wrap gap-5 underline">
-        <li><a href="https://github.com/pablo-albaladejo">GitHub</a></li>
-        <li>
-          <a href="https://linkedin.com/in/pabloalbaladejomestre"
-            >LinkedIn</a
+    <section class="mt-[72px]">
+      <h2
+        class="mb-2 font-mono text-[15px] font-semibold tracking-[0.08em] text-faint"
+      >
+        WRITING
+      </h2>
+      {
+        posts.map((post, i) => (
+          <div
+            class:list={[
+              "flex items-baseline justify-between gap-6 border-t border-line py-5",
+              i === posts.length - 1 && "border-b",
+            ]}
           >
-        </li>
-        <li>
-          <a href="https://stackoverflow.com/users/3395884/pablo-albaladejo"
-            >Stack Overflow</a
-          >
-        </li>
-        <li>
-          <a href="mailto:pablo.albaladejo.mestre@gmail.com">Email</a>
-        </li>
-        <li><a href="https://kaiord.com">kaiord.com</a></li>
-      </ul>
+            <a
+              href={`/blog/${post.id}`}
+              class="text-[19px] font-bold text-ink no-underline text-pretty hover:underline"
+            >
+              {post.data.title}
+            </a>
+            <span class="font-mono text-[12.5px] whitespace-nowrap text-faint">
+              {fmt(post.data.pubDate)}
+            </span>
+          </div>
+        ))
+      }
+      <p class="mt-5">
+        <a
+          href="/blog"
+          class="font-mono text-[13px] text-accent no-underline hover:underline"
+          >All writing →</a
+        >
+      </p>
+    </section>
+
+    <section class="mt-[72px] pb-24">
+      <h2
+        class="mb-5 font-mono text-[15px] font-semibold tracking-[0.08em] text-faint"
+      >
+        ELSEWHERE
+      </h2>
+      <nav class="flex flex-wrap gap-6 font-mono text-[13.5px]">
+        <a
+          href="https://github.com/pablo-albaladejo"
+          class="text-accent no-underline hover:underline">GitHub</a
+        >
+        <a
+          href="https://linkedin.com/in/pabloalbaladejomestre"
+          class="text-accent no-underline hover:underline">LinkedIn</a
+        >
+        <a
+          href="https://stackoverflow.com/users/3395884/pablo-albaladejo"
+          class="text-accent no-underline hover:underline">Stack Overflow</a
+        >
+        <a
+          href="mailto:pablo.albaladejo.mestre@gmail.com"
+          class="text-accent no-underline hover:underline">Email</a
+        >
+        <a
+          href="https://kaiord.com"
+          class="text-accent no-underline hover:underline">kaiord.com</a
+        >
+      </nav>
     </section>
   </main>
 </Base>
