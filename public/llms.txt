@@ -10,6 +10,13 @@
 - [Home](https://pabloalbaladejo.com/): positioning and projects, in English
 - [Home (Spanish)](https://pabloalbaladejo.com/es): the same, in Spanish
 
+## Writing
+
+- [Shipping production software with AI agents](https://pabloalbaladejo.com/blog/shipping-production-software-with-ai-agents):
+  the system that lets AI agents ship production code — specs before code,
+  zero-tolerance CI as the reviewer, mechanical convention guards, and isolated
+  worktrees, grounded in the AI-built Kaiord codebase
+
 ## Projects
 
 - [Kaiord](https://kaiord.com): open-source, local-first training platform
