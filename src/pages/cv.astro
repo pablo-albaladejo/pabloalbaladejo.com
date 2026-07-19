@@ -1,0 +1,330 @@
+---
+import fs from "node:fs";
+import Base from "../layouts/Base.astro";
+
+// Only render the download button if the PDF has actually been placed in
+// public/ — avoids shipping a button that 404s before the file is added.
+const pdfName = "Pablo_Albaladejo_CV.pdf";
+const hasPdf = fs.existsSync(new URL(`../../public/${pdfName}`, import.meta.url));
+
+const experience = [
+  {
+    period: "Mar 2025 – Present",
+    role: "Senior Software Engineer & AI Architect",
+    org: "Aircall — Madrid (Hybrid)",
+    bullets: [
+      "Architected Aircall's AI Call Summarization feature — 10K+ daily transcriptions summarized with +99.9% reliability across serverless microservices, serving thousands of B2B customers.",
+      "Shipped Company Context Knowledge Graph and Prompt Optimizer: streaming LLM features that let customers enrich and customize AI-generated insights in real time.",
+      "Pioneered LLM evaluation practices with benchmark suites as quality gates for model migrations; full observability with Datadog.",
+      "Delivered Async Transcription end to end — a new microservice from scratch to production in ~3 weeks (Lambda, SQS, Step Functions, Aurora PostgreSQL), including public API and webhooks.",
+      "Drove AI adoption org-wide: AI Guild standards, an internal SDLC agent, and a company-wide AI Showcase.",
+    ],
+  },
+  {
+    period: "Jan 2026 – Present",
+    role: "Founder Engineer",
+    org: "Deepgent — deepgent.net (Remote · Side project)",
+    bullets: [
+      "Built a multi-tenant AI chatbot SaaS solo (TypeScript, Python, AWS Bedrock) — agentic tool calling with fail-closed auth, identity verification (KBA + OTP), circuit breakers, and per-tenant tool whitelisting.",
+      "RAG knowledge base with layered prompt architecture and company-scoped isolation; an LLM eval framework (grounding, honesty, LLM-as-judge) as CI quality gates; an MCP server for AI-assisted admin ops.",
+    ],
+  },
+  {
+    period: "Apr 2022 – Mar 2025",
+    years: "3 yrs",
+    role: "Lead Cloud Software Engineer",
+    org: "hireful — Remote",
+    bullets: [
+      "Led migration of legacy apps to cloud-based, event-driven architectures using hexagonal architecture, Node.js, NestJS, Lambda, DynamoDB, Fargate and CDK.",
+      "Implemented CI/CD pipelines with AWS CodePipeline, GitHub Actions, and Docker, enforcing automated testing gates for high-quality B2B SaaS delivery.",
+      "Designed cloud-native microservices with API Gateway, Fargate, and MongoDB, aligning technical decisions with product strategy.",
+    ],
+  },
+  {
+    period: "Mar 2021 – May 2023",
+    years: "2 yrs",
+    role: "Strategist Product Engineer",
+    org: "Sporttrait — Remote (Part-time)",
+    body: "Defined technology strategy and designed full B2C SaaS infrastructure with Next.js, AWS EventBridge, and containerized deployments on Kubernetes and Docker.",
+  },
+  {
+    period: "Sep 2018 – Mar 2022",
+    years: "3.5 yrs",
+    role: "Software Architect / Technical Lead",
+    org: "DCSL GuideSmiths Spain — Madrid",
+    body: "Led digital transformation projects for B2B clients, managing squads of 2–4 delivering React.js, AWS, and React Native solutions.",
+  },
+  {
+    period: "Feb 2018 – Aug 2018",
+    role: "CTO & Technical Co-Founder",
+    org: "Athletika — Alicante",
+    body: "Built the MVP from scratch during the seed phase (React.js, React Native, GCP/Firebase). Pivotal role in business and investment processes.",
+  },
+  {
+    period: "Jun 2017 – Feb 2018",
+    years: "9 mos",
+    role: "Mobile Lead Developer",
+    org: "everis — Alicante",
+    body: "Led hybrid mobile development for a banking group, delivering customizable apps with security compliance and test automation. Technical reference and internal trainer.",
+  },
+  {
+    period: "Oct 2014 – May 2015",
+    years: "8 mos",
+    role: "CTO",
+    org: "MedBravo — Alicante",
+    body: "Built a HealthTech SaaS platform for cancer-patient referral to clinical trials. FICHe finalist at Health 2.0 Europe.",
+  },
+  {
+    period: "Mar 2009 – Oct 2014",
+    years: "5 yrs 8 mos",
+    role: "Software Engineer",
+    org: "Indra — Madrid",
+    body: "MIDCAS project for the European Defence Agency: developed anti-collision algorithms for UAVs in non-segregated airspace (C, C++, Monte Carlo).",
+  },
+];
+
+const awsCerts = [
+  { name: "Generative AI Developer – Professional", note: "Early Adopter, 2026" },
+  { name: "Solutions Architect – Professional", note: "2026" },
+  { name: "Machine Learning Engineer – Associate", note: "2025" },
+  { name: "AI Practitioner", note: "Early Adopter, 2024" },
+  { name: "Security – Specialty", note: "" },
+  { name: "Developer – Associate", note: "" },
+  { name: "Solutions Architect – Associate", note: "" },
+  { name: "SysOps Administrator – Associate", note: "" },
+  { name: "Cloud Practitioner", note: "" },
+];
+
+const label =
+  "font-mono text-[14px] font-semibold tracking-[0.08em] text-faint";
+
+const profileJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: "Pablo Albaladejo",
+    alternateName: "Pablo Albaladejo Mestre",
+    url: "https://pabloalbaladejo.com/cv",
+    jobTitle: "Senior Software Engineer & AI Architect",
+    worksFor: { "@type": "Organization", name: "Aircall" },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: "Madrid",
+      addressCountry: "ES",
+    },
+    alumniOf: {
+      "@type": "CollegeOrUniversity",
+      name: "Universidad Complutense de Madrid",
+    },
+    knowsAbout: [
+      "AI agents",
+      "LLM evaluation",
+      "LLM observability",
+      "AWS",
+      "TypeScript",
+      "Production AI systems",
+      "Serverless architecture",
+      "RAG",
+    ],
+    hasCredential: awsCerts.map((c) => ({
+      "@type": "EducationalOccupationalCredential",
+      name: `AWS Certified ${c.name}`,
+      credentialCategory: "certification",
+      recognizedBy: { "@type": "Organization", name: "Amazon Web Services" },
+    })),
+    sameAs: [
+      "https://github.com/pablo-albaladejo",
+      "https://linkedin.com/in/pabloalbaladejomestre",
+      "https://stackoverflow.com/users/3395884/pablo-albaladejo",
+      "https://kaiord.com",
+    ],
+  },
+});
+---
+
+<Base
+  title="CV — Pablo Albaladejo"
+  description="Curriculum vitae of Pablo Albaladejo — Senior Software Engineer & AI Architect, 9× AWS Certified, 17+ years building backend and AI systems at scale. Currently at Aircall, creator of Kaiord."
+  lang="en"
+  path="/cv"
+  active="cv"
+>
+  <script type="application/ld+json" set:html={profileJsonLd} slot="head" />
+
+  <main class="mx-auto max-w-[76ch] pt-16 min-[700px]:pt-[88px]">
+    <!-- Title + download -->
+    <div class="flex flex-wrap items-start justify-between gap-8">
+      <div class="flex-1 basis-[340px]">
+        <h1
+          class="mb-2.5 text-[38px] leading-[1.1] font-bold tracking-[-0.02em] text-pretty min-[700px]:text-[44px]"
+        >
+          Curriculum vitae
+        </h1>
+        <p class="m-0 text-[18px] leading-[1.6] text-body text-pretty">
+          Senior Software Engineer &amp; AI Architect · 9× AWS Certified ·
+          Backend &amp; AI at scale · 17+ years.
+        </p>
+      </div>
+      {
+        hasPdf && (
+          <a
+            href={`/${pdfName}`}
+            download={pdfName}
+            class="flex shrink-0 items-center gap-2.5 rounded-lg bg-ink px-5 py-3.5 font-mono text-[13.5px] font-medium text-paper no-underline hover:bg-accent"
+          >
+            <svg
+              width="15"
+              height="15"
+              viewBox="0 0 16 16"
+              fill="none"
+              class="block"
+              aria-hidden="true"
+            >
+              <path
+                d="M8 1v9m0 0L4.5 6.5M8 10l3.5-3.5M2 13h12"
+                stroke="currentColor"
+                stroke-width="1.6"
+                stroke-linecap="round"
+                stroke-linejoin="round"></path>
+            </svg>
+            Download PDF
+          </a>
+        )
+      }
+    </div>
+    <p
+      class="mt-5 flex flex-wrap gap-4 font-mono text-[12.5px] text-faint"
+    >
+      <span>Madrid, Spain</span>
+      <span class="text-line-2">·</span>
+      <a
+        href="https://linkedin.com/in/pabloalbaladejomestre"
+        data-email="pablo.albaladejo.mestre"
+        data-domain="gmail.com"
+        class="text-accent no-underline hover:underline">Email</a
+      >
+      <span class="text-line-2">·</span>
+      <a
+        href="https://linkedin.com/in/pabloalbaladejomestre"
+        class="text-accent no-underline hover:underline">LinkedIn</a
+      >
+      <span class="text-line-2">·</span>
+      <a
+        href="https://github.com/pablo-albaladejo"
+        class="text-accent no-underline hover:underline">GitHub</a
+      >
+    </p>
+
+    <!-- Summary -->
+    <section class="mt-14">
+      <h2 class:list={[label, "mb-4"]}>SUMMARY</h2>
+      <p class="m-0 text-[18px] leading-[1.7] text-ink text-pretty">
+        I build systems that scale, and make AI work in production. A 9×&nbsp;AWS-certified
+        engineer with 17+&nbsp;years designing high-throughput architectures —
+        currently at Aircall, where the transcription platform processes
+        <strong>1M+ calls a day</strong> across serverless microservices with
+        +99.9% reliability. Former CTO and startup co-founder who bridges
+        infrastructure, product instinct, and cutting-edge AI into features
+        that ship.
+      </p>
+    </section>
+
+    <!-- Experience -->
+    <section class="mt-14">
+      <h2 class:list={[label, "mb-2"]}>EXPERIENCE</h2>
+      {
+        experience.map((job, i) => (
+          <article
+            class:list={[
+              "grid grid-cols-[150px_1fr] gap-7 border-t border-line py-[26px] max-[640px]:grid-cols-1 max-[640px]:gap-2",
+              i === experience.length - 1 && "border-b",
+            ]}
+          >
+            <div class="font-mono text-[12px] leading-[1.6] text-faint">
+              {job.period}
+              {job.years && (
+                <>
+                  <br />
+                  <span class="text-faint/70">{job.years}</span>
+                </>
+              )}
+            </div>
+            <div>
+              <h3 class="m-0 mb-0.5 text-[20px] font-bold tracking-[-0.01em] text-ink">
+                {job.role}
+              </h3>
+              <p class="m-0 mb-3 text-[15px] text-muted">{job.org}</p>
+              {job.bullets ? (
+                <ul class="m-0 grid list-disc gap-2 pl-5 text-[16px] leading-[1.55] text-body">
+                  {job.bullets.map((b) => (
+                    <li class="text-pretty">{b}</li>
+                  ))}
+                </ul>
+              ) : (
+                <p class="m-0 text-[16px] leading-[1.55] text-body text-pretty">
+                  {job.body}
+                </p>
+              )}
+            </div>
+          </article>
+        ))
+      }
+    </section>
+
+    <!-- Projects + Education -->
+    <section
+      class="mt-14 grid grid-cols-2 gap-12 max-[640px]:grid-cols-1 max-[640px]:gap-10"
+    >
+      <div>
+        <h2 class:list={[label, "mb-4"]}>FEATURED PROJECTS &amp; WRITING</h2>
+        <ul
+          class="m-0 grid list-disc gap-3 pl-5 text-[16px] leading-[1.55] text-body"
+        >
+          <li class="text-pretty">
+            <a
+              href="https://kaiord.com"
+              class="text-accent no-underline hover:underline">Kaiord</a
+            > — an open-source TypeScript monorepo with hexagonal architecture: 9
+            npm packages, a CLI, an MCP server, and a plugin system for
+            fitness-data conversion; 80%+ test coverage, every line written by
+            AI agents.
+          </li>
+          <li class="text-pretty">
+            <a
+              href="/blog"
+              class="text-accent no-underline hover:underline">Technical writing</a
+            > on evals, agentic development, and observability for AI pipelines.
+          </li>
+        </ul>
+      </div>
+      <div>
+        <h2 class:list={[label, "mb-4"]}>EDUCATION</h2>
+        <p class="m-0 text-[16px] leading-[1.55] text-body">
+          <strong class="text-ink"
+            >Ingeniero Superior en Informática</strong
+          > (B.Sc. + M.Sc., Computer Engineering)<br />
+          Universidad Complutense de Madrid<br />
+          <span class="font-mono text-[12px] text-faint">2002 – 2010</span>
+        </p>
+      </div>
+    </section>
+
+    <!-- AWS certifications -->
+    <section class="mt-12 pb-24">
+      <h2 class:list={[label, "mb-4"]}>
+        AWS CERTIFICATIONS <span class="text-accent">(9×)</span>
+      </h2>
+      <div class="flex flex-wrap gap-2">
+        {
+          awsCerts.map((c) => (
+            <span class="rounded-full border border-line bg-surface px-3.5 py-1.5 font-mono text-[12.5px] text-body">
+              {c.name}
+              {c.note && <span class="text-faint"> ({c.note})</span>}
+            </span>
+          ))
+        }
+      </div>
+    </section>
+  </main>
+</Base>
