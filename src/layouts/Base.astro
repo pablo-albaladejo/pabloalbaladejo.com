@@ -6,7 +6,7 @@ type Props = {
   description: string;
   lang?: "en";
   path: string;
-  active?: "writing" | "talks";
+  active?: "writing" | "talks" | "cv";
 };
 
 const { title, description, lang = "en", path, active } = Astro.props;
@@ -77,7 +77,7 @@ const navActive = "text-ink border-b-2 border-accent pb-0.5 no-underline";
     >
       <a href="/" class="flex items-center gap-3 text-ink no-underline">
         <span
-          class="box-border inline-flex h-[34px] w-[34px] items-end justify-center rounded-[7px] bg-ink pb-1.5 font-serif text-[19px] leading-none font-semibold text-paper dark:bg-[#26241e]"
+          class="box-border inline-flex h-[34px] w-[34px] items-end justify-center rounded-[7px] bg-ink pb-1.5 font-serif text-[19px] leading-none font-semibold text-paper"
           aria-hidden="true"
           >pa<span
             class="mb-px ml-px inline-block h-[3px] w-[5px] bg-accent-br"
@@ -94,6 +94,7 @@ const navActive = "text-ink border-b-2 border-accent pb-0.5 no-underline";
         <a href="/talks" class={active === "talks" ? navActive : navLink}
           >Talks</a
         >
+        <a href="/cv" class={active === "cv" ? navActive : navLink}>CV</a>
         <button
           id="theme-toggle"
           type="button"
