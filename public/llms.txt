@@ -10,6 +10,8 @@
 - [Home](https://pabloalbaladejo.com/): positioning and projects, in English
 - [Talks](https://pabloalbaladejo.com/talks): speaker bio, talk abstracts,
   and booking (agentic development, LLM evals, GEO), in English
+- [CV](https://pabloalbaladejo.com/cv): curriculum vitae — experience, 9x AWS
+  certifications, education, and PDF download, in English
 
 ## Writing
 
