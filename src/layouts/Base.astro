@@ -17,10 +17,28 @@ const navActive = "text-ink border-b-2 border-accent pb-0.5 no-underline";
 ---
 
 <!doctype html>
-<html lang={lang}>
+<html lang={lang} data-theme-setting="system">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script is:inline>
+      // Apply the persisted theme before first paint to avoid a flash of the
+      // wrong palette. `theme` is "light" | "dark" | "system" (default). The
+      // footer script wires the toggle button; this only sets the initial state.
+      (function () {
+        var setting = "system";
+        try {
+          setting = localStorage.getItem("theme") || "system";
+        } catch (e) {}
+        var dark =
+          setting === "dark" ||
+          (setting === "system" &&
+            matchMedia("(prefers-color-scheme: dark)").matches);
+        var root = document.documentElement;
+        root.classList.toggle("dark", dark);
+        root.dataset.themeSetting = setting;
+      })();
+    </script>
     <title>{title}</title>
     <meta name="description" content={description} />
     <meta name="robots" content="index, follow" />
@@ -76,6 +94,54 @@ const navActive = "text-ink border-b-2 border-accent pb-0.5 no-underline";
         <a href="/talks" class={active === "talks" ? navActive : navLink}
           >Talks</a
         >
+        <button
+          id="theme-toggle"
+          type="button"
+          aria-label="Color theme: system"
+          title="Color theme: system"
+          class="-m-1.5 flex items-center rounded-md p-1.5 text-muted transition-colors hover:text-ink"
+        >
+          <svg
+            class="ti ti-system h-[17px] w-[17px]"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <rect x="2" y="3" width="20" height="14" rx="2"></rect>
+            <path d="M8 21h8M12 17v4"></path>
+          </svg>
+          <svg
+            class="ti ti-light h-[17px] w-[17px]"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <circle cx="12" cy="12" r="4"></circle>
+            <path
+              d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+            ></path>
+          </svg>
+          <svg
+            class="ti ti-dark h-[17px] w-[17px]"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"></path>
+          </svg>
+        </button>
       </nav>
     </header>
     <slot />
@@ -91,6 +157,44 @@ const navActive = "text-ink border-b-2 border-accent pb-0.5 no-underline";
             href += "?subject=" + encodeURIComponent(el.dataset.subject);
           el.setAttribute("href", href);
         });
+    </script>
+    <script is:inline>
+      // Wire the header toggle: cycle System -> Light -> Dark and persist the
+      // choice. The <head> script already applied the initial palette; here we
+      // only update on click and keep "system" live with the OS preference.
+      (function () {
+        var order = ["system", "light", "dark"];
+        var btn = document.getElementById("theme-toggle");
+        if (!btn) return;
+        var mq = matchMedia("(prefers-color-scheme: dark)");
+        function read() {
+          try {
+            return localStorage.getItem("theme") || "system";
+          } catch (e) {
+            return "system";
+          }
+        }
+        function apply(setting) {
+          var dark =
+            setting === "dark" || (setting === "system" && mq.matches);
+          var root = document.documentElement;
+          root.classList.toggle("dark", dark);
+          root.dataset.themeSetting = setting;
+          btn.setAttribute("aria-label", "Color theme: " + setting);
+          btn.title = "Color theme: " + setting;
+        }
+        apply(read());
+        btn.addEventListener("click", function () {
+          var next = order[(order.indexOf(read()) + 1) % order.length];
+          try {
+            localStorage.setItem("theme", next);
+          } catch (e) {}
+          apply(next);
+        });
+        mq.addEventListener("change", function () {
+          if (read() === "system") apply("system");
+        });
+      })();
     </script>
   </body>
 </html>
