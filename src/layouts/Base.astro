@@ -7,9 +7,17 @@ type Props = {
   lang?: "en";
   path: string;
   active?: "writing" | "talks" | "cv";
+  ogImage?: string;
 };
 
-const { title, description, lang = "en", path, active } = Astro.props;
+const {
+  title,
+  description,
+  lang = "en",
+  path,
+  active,
+  ogImage = "/og/index.png",
+} = Astro.props;
 const site = "https://pabloalbaladejo.com";
 const umamiId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
 const navLink = "text-muted hover:text-ink no-underline";
@@ -46,6 +54,7 @@ const navActive = "text-ink border-b-2 border-accent pb-0.5 no-underline";
     <link rel="alternate" hreflang="en" href={`${site}${path}`} />
     <link rel="alternate" hreflang="x-default" href={`${site}${path}`} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link
       rel="alternate"
@@ -59,6 +68,14 @@ const navActive = "text-ink border-b-2 border-accent pb-0.5 no-underline";
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Pablo Albaladejo" />
     <meta property="og:locale" content="en_US" />
+    <meta property="og:image" content={`${site}${ogImage}`} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={title} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={`${site}${ogImage}`} />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
     {
       umamiId && (
         <script
