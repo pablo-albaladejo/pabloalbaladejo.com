@@ -1,6 +1,11 @@
 @import "tailwindcss";
 @import "@fontsource-variable/source-serif-4";
 
+/* Drive the `dark:` variant from a `.dark` class on <html> (set by the no-flash
+   script in Base.astro) instead of `prefers-color-scheme`, so the header toggle
+   controls utilities and token overrides through the same single switch. */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   /* ---- Color: light (default) ---- */
   --color-paper: #fafaf7;
@@ -23,23 +28,24 @@
   --font-mono: ui-monospace, "SF Mono", Menlo, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --color-paper: #14130f;
-    --color-surface: #1e1c17;
-    --color-ink: #f4f1e9;
-    --color-body: #c7c2b8;
-    --color-muted: #a8a296;
-    --color-faint: #857f73;
-    --color-line: #2a2822;
-    --color-line-2: #35322a;
-    --color-accent: #f08a5d;
-    --color-accent-br: #e8571c;
-    --color-code-bg: #0e0d0a;
-    --color-code-fg: #e9e6de;
-    --color-code-inl: #26241e;
-    --color-select: #4a2a1a;
-  }
+/* Dark tokens apply when <html> carries `.dark`. The no-flash script in
+   Base.astro adds that class for both an explicit "dark" choice and the
+   "system" setting when the OS prefers dark, so this single rule covers both. */
+.dark {
+  --color-paper: #14130f;
+  --color-surface: #1e1c17;
+  --color-ink: #f4f1e9;
+  --color-body: #c7c2b8;
+  --color-muted: #a8a296;
+  --color-faint: #857f73;
+  --color-line: #2a2822;
+  --color-line-2: #35322a;
+  --color-accent: #f08a5d;
+  --color-accent-br: #e8571c;
+  --color-code-bg: #0e0d0a;
+  --color-code-fg: #e9e6de;
+  --color-code-inl: #26241e;
+  --color-select: #4a2a1a;
 }
 
 ::selection {
@@ -129,4 +135,16 @@ body {
   border: 0;
   border-top: 1px solid var(--color-line);
   margin: 2.5rem 0;
+}
+
+/* Theme toggle: show the icon that matches the current *setting* (not the
+   resolved appearance). `data-theme-setting` lives on <html>, set by the
+   no-flash script; default markup value keeps an icon visible without JS. */
+#theme-toggle .ti {
+  display: none;
+}
+:root[data-theme-setting="system"] #theme-toggle .ti-system,
+:root[data-theme-setting="light"] #theme-toggle .ti-light,
+:root[data-theme-setting="dark"] #theme-toggle .ti-dark {
+  display: block;
 }
