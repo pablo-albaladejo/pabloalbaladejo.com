@@ -30,6 +30,12 @@
   a mechanism-by-mechanism case study of optimizing kaiord.com for AI answer
   engines in one day — llms.txt, robots rules for AI crawlers, structured
   data, Markdown mirrors, and registries — with a link to every artifact
+- [Stop Chatting, Start Specifying: Spec-Driven Design with Kiro IDE](https://dev.to/kirodotdev/stop-chatting-start-specifying-spec-driven-design-with-kiro-ide-3b3o):
+  spec-driven development with Kiro IDE, using the Kaiord project as the case
+  study — external, on the Kiro blog (dev.to), 2025-12-01
+- [Observable AI Streaming on AWS — a 4-part series](https://dev.to/pabloalbaladejo/observable-ai-streaming-on-aws-part-1-api-gateway-rest-with-lambda-595a):
+  streaming LLM responses from Bedrock through Lambda with deferred observability
+  via TransformStream flush() — external, dev.to, 2025-02
 - [RSS feed](https://pabloalbaladejo.com/rss.xml)
 
 ## Projects
