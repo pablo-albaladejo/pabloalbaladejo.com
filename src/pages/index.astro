@@ -1,7 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
-import { externalWriting } from "../data/external-writing";
+import { externalWriting, fmtMonthYear } from "../data/external-writing";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -198,7 +198,7 @@ const fmt = (d: Date) => d.toISOString().slice(0, 10);
               datetime={piece.iso}
               class="font-mono text-[12px] whitespace-nowrap text-faint"
             >
-              {piece.date}
+              {fmtMonthYear(piece.iso)}
             </time>
           </div>
         ))
