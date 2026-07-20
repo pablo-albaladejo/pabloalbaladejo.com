@@ -104,9 +104,9 @@ const profileJsonLd = JSON.stringify({
   mainEntity: {
     "@type": "Person",
     name: "Pablo Albaladejo",
-    alternateName: "Pablo Albaladejo Mestre",
+    alternateName: ["Pablo Albaladejo Mestre", "Pablo Albadalejo"],
     url: "https://pabloalbaladejo.com/cv",
-    jobTitle: "Senior Software Engineer & AI Architect",
+    jobTitle: "AI Engineer",
     worksFor: { "@type": "Organization", name: "Aircall" },
     address: {
       "@type": "PostalAddress",
@@ -126,6 +126,7 @@ const profileJsonLd = JSON.stringify({
       "Production AI systems",
       "Serverless architecture",
       "RAG",
+      "AI infrastructure",
     ],
     hasCredential: awsCerts.map((c) => ({
       "@type": "EducationalOccupationalCredential",
