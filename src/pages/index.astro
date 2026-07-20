@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Base from "../layouts/Base.astro";
+import { externalWriting } from "../data/external-writing";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
@@ -165,9 +166,40 @@ const fmt = (d: Date) => d.toISOString().slice(0, 10);
             >
               {post.data.title}
             </a>
-            <span class="font-mono text-[12.5px] whitespace-nowrap text-faint">
+            <time
+              datetime={post.data.pubDate.toISOString()}
+              class="font-mono text-[12.5px] whitespace-nowrap text-faint"
+            >
               {fmt(post.data.pubDate)}
-            </span>
+            </time>
+          </div>
+        ))
+      }
+      <p
+        class="mt-8 mb-1 font-mono text-[12px] tracking-[0.08em] text-faint"
+      >
+        ALSO PUBLISHED
+      </p>
+      {
+        externalWriting.map((piece) => (
+          <div class="flex items-baseline justify-between gap-6 border-t border-line py-4">
+            <a
+              href={piece.href}
+              target="_blank"
+              rel="noopener"
+              class="text-[16px] font-semibold text-ink no-underline text-pretty hover:underline"
+            >
+              {piece.title}{" "}
+              <span class="font-mono text-[11.5px] whitespace-nowrap text-faint">
+                ↗ {piece.venue}
+              </span>
+            </a>
+            <time
+              datetime={piece.iso}
+              class="font-mono text-[12px] whitespace-nowrap text-faint"
+            >
+              {piece.date}
+            </time>
           </div>
         ))
       }

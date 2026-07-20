@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import Base from "../../layouts/Base.astro";
+import { externalWriting } from "../../data/external-writing";
 
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf(),
@@ -47,12 +48,54 @@ const fmt = (d: Date) => d.toISOString().slice(0, 10);
               >
                 {post.data.title}
               </a>
-              <span class="font-mono text-[12.5px] whitespace-nowrap text-faint">
+              <time
+                datetime={post.data.pubDate.toISOString()}
+                class="font-mono text-[12.5px] whitespace-nowrap text-faint"
+              >
                 {fmt(post.data.pubDate)}
-              </span>
+              </time>
             </div>
           ))
         )
+      }
+    </section>
+
+    <section class="mt-16">
+      <h2
+        class="mb-2 font-mono text-[15px] font-semibold tracking-[0.08em] text-faint"
+      >
+        ALSO PUBLISHED
+      </h2>
+      <p class="mb-2 text-[16px] leading-[1.6] text-muted">
+        Writing on other platforms.
+      </p>
+      {
+        externalWriting.map((piece, i) => (
+          <div
+            class:list={[
+              "flex items-baseline justify-between gap-6 border-t border-line py-5",
+              i === externalWriting.length - 1 && "border-b",
+            ]}
+          >
+            <a
+              href={piece.href}
+              target="_blank"
+              rel="noopener"
+              class="text-[19px] font-bold text-ink no-underline text-pretty hover:underline"
+            >
+              {piece.title}{" "}
+              <span class="font-mono text-[12px] whitespace-nowrap text-faint">
+                ↗ {piece.venue}
+              </span>
+            </a>
+            <time
+              datetime={piece.iso}
+              class="font-mono text-[12.5px] whitespace-nowrap text-faint"
+            >
+              {piece.date}
+            </time>
+          </div>
+        ))
       }
     </section>
   </main>
