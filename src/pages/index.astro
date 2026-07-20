@@ -10,9 +10,9 @@ const personJsonLd = JSON.stringify({
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Pablo Albaladejo",
-  alternateName: "Pablo Albaladejo Mestre",
+  alternateName: ["Pablo Albaladejo Mestre", "Pablo Albadalejo"],
   url: "https://pabloalbaladejo.com/",
-  jobTitle: "Senior Backend + AI Engineer",
+  jobTitle: "AI Engineer",
   worksFor: { "@type": "Organization", name: "Aircall" },
   address: {
     "@type": "PostalAddress",
@@ -20,11 +20,13 @@ const personJsonLd = JSON.stringify({
     addressCountry: "ES",
   },
   description:
-    "Senior Backend + AI engineer (AWS, TypeScript) building production software with AI agents. LLM evals, monitoring and observability. Creator of Kaiord.",
+    "AI Engineer — production LLM systems, agents and infrastructure (AWS, TypeScript). Building software with AI agents; LLM evals, monitoring and observability. Creator of Kaiord.",
   knowsAbout: [
     "AI agents",
     "LLM evaluation",
     "LLM observability",
+    "RAG",
+    "AI infrastructure",
     "AWS",
     "TypeScript",
     "Production AI systems",
@@ -75,7 +77,7 @@ const fmt = (d: Date) => d.toISOString().slice(0, 10);
 
 <Base
   title="Pablo Albaladejo — I build production software with AI agents"
-  description="Senior Backend + AI engineer (AWS, TypeScript) building production software with AI agents — LLM evals, monitoring & observability. Creator of Kaiord."
+  description="AI Engineer — production LLM systems, agents & infrastructure (AWS, TypeScript). Building software with AI agents; LLM evals, monitoring & observability. Creator of Kaiord."
   lang="en"
   path="/"
   ogImage="/og/index.png"
@@ -93,8 +95,9 @@ const fmt = (d: Date) => d.toISOString().slice(0, 10);
       I build production software with AI&nbsp;agents.
     </h1>
     <p class="text-[19px] leading-[1.7] text-body text-pretty">
-      Senior Backend + AI engineer (AWS, TypeScript) — 17+ years in SaaS,
-      now at Aircall, where my systems process
+      AI Engineer — production LLM systems, agents &amp; infrastructure.
+      17+ years in SaaS (AWS, TypeScript), now at Aircall, where my systems
+      process
       <strong class="text-ink">1M+ call transcriptions a day</strong>. On my
       own time I ship products written end to end with AI agents: strict
       CI, specs, real users, and the LLM evals, monitoring &amp;
