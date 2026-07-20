@@ -90,7 +90,7 @@ const navActive = "text-ink border-b-2 border-accent pb-0.5 no-underline";
   </head>
   <body class="mx-auto max-w-[1100px] px-6 min-[700px]:px-8">
     <header
-      class="flex items-center justify-between border-b border-line py-7"
+      class="flex items-center justify-between border-b border-line py-7 max-[680px]:flex-wrap max-[680px]:gap-3 max-[680px]:py-[18px]"
     >
       <a href="/" class="flex items-center gap-3 text-ink no-underline">
         <span
@@ -100,11 +100,14 @@ const navActive = "text-ink border-b-2 border-accent pb-0.5 no-underline";
             class="mb-px ml-px inline-block h-[3px] w-[5px] bg-accent-br"
           ></span></span
         >
-        <span class="text-[17px] font-semibold tracking-[-0.01em]"
+        <span
+          class="text-[17px] font-semibold tracking-[-0.01em] whitespace-nowrap max-[680px]:text-[16px]"
           >Pablo Albaladejo</span
         >
       </a>
-      <nav class="flex items-center gap-7 font-mono text-[13px]">
+      <nav
+        class="flex items-center gap-7 font-mono text-[13px] max-[680px]:w-full max-[680px]:justify-between max-[680px]:gap-0"
+      >
         <a href="/blog" class={active === "writing" ? navActive : navLink}
           >Writing</a
         >
