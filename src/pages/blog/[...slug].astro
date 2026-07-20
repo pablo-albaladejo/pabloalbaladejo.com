@@ -66,6 +66,8 @@ const category = entry.data.category;
   path={`/blog/${entry.id}`}
   active="writing"
   ogImage={`/og/blog/${entry.id}.png`}
+  ogType="article"
+  publishedTime={entry.data.pubDate.toISOString()}
 >
   <script
     type="application/ld+json"

@@ -1,7 +1,7 @@
 ---
 title: "Observability for LLM pipelines: from streams to sinks"
 description: "A practical guide to LLM observability: how to monitor LLM pipelines in production when classic APM misses streaming and agents — telemetry as a swappable sink, deferred-flush metrics, and real code."
-pubDate: 2026-07-18
+pubDate: 2026-07-11
 category: "OBSERVABILITY"
 faq:
   - q: "How is LLM observability different from normal APM?"

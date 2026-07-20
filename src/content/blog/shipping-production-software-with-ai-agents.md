@@ -1,7 +1,7 @@
 ---
 title: "Shipping production software with AI agents"
 description: "Can AI agents write production code? Yes, if the system around them enforces quality mechanically. The agentic development workflow that ships production software."
-pubDate: 2026-07-18
+pubDate: 2026-06-27
 category: "AGENTIC DEV"
 faq:
   - q: "Can AI agents write production code?"
