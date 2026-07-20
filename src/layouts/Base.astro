@@ -8,6 +8,8 @@ type Props = {
   path: string;
   active?: "writing" | "talks" | "cv";
   ogImage?: string;
+  ogType?: string;
+  publishedTime?: string;
 };
 
 const {
@@ -17,6 +19,8 @@ const {
   path,
   active,
   ogImage = "/og/index.png",
+  ogType = "website",
+  publishedTime,
 } = Astro.props;
 const site = "https://pabloalbaladejo.com";
 const umamiId = import.meta.env.PUBLIC_UMAMI_WEBSITE_ID;
@@ -65,7 +69,15 @@ const navActive = "text-ink border-b-2 border-accent pb-0.5 no-underline";
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={`${site}${path}`} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={ogType} />
+    {
+      publishedTime && (
+        <>
+          <meta property="article:published_time" content={publishedTime} />
+          <meta property="article:author" content="Pablo Albaladejo" />
+        </>
+      )
+    }
     <meta property="og:site_name" content="Pablo Albaladejo" />
     <meta property="og:locale" content="en_US" />
     <meta property="og:image" content={`${site}${ogImage}`} />
