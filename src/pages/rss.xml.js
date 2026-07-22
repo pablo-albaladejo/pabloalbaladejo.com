@@ -12,11 +12,13 @@ export async function GET(context) {
     description:
       "Essays on building production software with AI agents: LLM evals, GEO, agentic development, and observability.",
     site: context.site,
+    // Match the site's trailingSlash: "never" so feed links equal canonicals.
+    trailingSlash: false,
     items: sorted.map((post) => ({
       title: post.data.title,
       description: post.data.description,
       pubDate: post.data.pubDate,
-      link: `/blog/${post.id}/`,
+      link: `/blog/${post.id}`,
     })),
   });
 }

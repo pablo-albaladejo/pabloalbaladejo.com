@@ -63,7 +63,45 @@ function handler(event) {
 `),
     });
 
+    // Astro emits content-hashed filenames under /_astro/; without an explicit
+    // Cache-Control browsers revalidate immutable files on every visit. Scoped
+    // to that prefix only — HTML keeps the default revalidation behavior.
+    const immutableAssets = new cloudfront.ResponseHeadersPolicy(
+      this,
+      "ImmutableAssets",
+      {
+        customHeadersBehavior: {
+          customHeaders: [
+            {
+              header: "Cache-Control",
+              value: "public, max-age=31536000, immutable",
+              override: true,
+            },
+          ],
+        },
+        securityHeadersBehavior: {
+          contentTypeOptions: { override: true },
+        },
+      },
+    );
+
+    // CloudFront standard logs are the only server-side traffic record for a
+    // static site (no backend): they feed the SEO observatory's crawler-stats
+    // collector (which search/AI bots fetch which pages). 90-day lifecycle
+    // bounds cost; ACLs enabled because the log-delivery group requires them.
+    const logBucket = new s3.Bucket(this, "CdnLogs", {
+      blockPublicAccess: s3.BlockPublicAccess.BLOCK_ALL,
+      objectOwnership: s3.ObjectOwnership.BUCKET_OWNER_PREFERRED,
+      encryption: s3.BucketEncryption.S3_MANAGED,
+      enforceSSL: true,
+      removalPolicy: RemovalPolicy.RETAIN,
+      lifecycleRules: [{ expiration: Duration.days(90) }],
+    });
+
     const distribution = new cloudfront.Distribution(this, "Distribution", {
+      enableLogging: true,
+      logBucket,
+      logFilePrefix: "site-cdn/",
       defaultBehavior: {
         origin: origins.S3BucketOrigin.withOriginAccessControl(bucket),
         viewerProtocolPolicy:
@@ -78,6 +116,16 @@ function handler(event) {
             eventType: cloudfront.FunctionEventType.VIEWER_REQUEST,
           },
         ],
+      },
+      additionalBehaviors: {
+        "_astro/*": {
+          origin: origins.S3BucketOrigin.withOriginAccessControl(bucket),
+          viewerProtocolPolicy:
+            cloudfront.ViewerProtocolPolicy.REDIRECT_TO_HTTPS,
+          compress: true,
+          cachePolicy: cloudfront.CachePolicy.CACHING_OPTIMIZED,
+          responseHeadersPolicy: immutableAssets,
+        },
       },
       domainNames: [DOMAIN, WWW],
       certificate,
