@@ -25,26 +25,14 @@
       "q": "pablo albaladejo",
       "position": null,
       "blocked": false,
-      "top": [
-        "es.linkedin.com",
-        "es.wikipedia.org",
-        "cadenaser.com",
-        "murciastartup.com",
-        "laopiniondemurcia.es"
-      ]
+      "top": []
     },
     {
       "id": "name-full",
       "q": "pablo albaladejo mestre",
       "position": null,
       "blocked": false,
-      "top": [
-        "es.linkedin.com",
-        "boe.es",
-        "resultados.triatlocv.org",
-        "f6s.com",
-        "pabloalbaladejomestre.blogspot.com"
-      ]
+      "top": []
     },
     {
       "id": "name-dev",
