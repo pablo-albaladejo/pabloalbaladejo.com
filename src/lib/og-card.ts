@@ -207,9 +207,9 @@ export function renderCard(headline: string, subtitle: string): Promise<Buffer> 
   return toPng(cardTree(headline, subtitle), 1200, 630);
 }
 
-/** 180×180 apple-touch-icon — the "pa" tile filling the frame. */
-export function renderIcon(): Promise<Buffer> {
-  return toPng(tile(180), 180, 180);
+/** Square "pa" tile icon (default 180 = apple-touch-icon). */
+export function renderIcon(size = 180): Promise<Buffer> {
+  return toPng(tile(size), size, size);
 }
 
 /** Truncate a subtitle to ~120 chars on a word boundary, adding an ellipsis. */

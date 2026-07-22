@@ -41,7 +41,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Sync to S3
-        run: aws s3 sync dist "s3://${{ vars.SITE_BUCKET }}" --delete
+        run: aws s3 sync dist "s3://${{ vars.SITE_BUCKET }}" --delete --exclude "AGENTS.md"
 
       - name: Invalidate CloudFront
         run: |
