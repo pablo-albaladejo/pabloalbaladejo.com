@@ -1,0 +1,120 @@
+{
+  "entry": {
+    "date": "2026-07-22",
+    "source": "serp-ddg",
+    "queries": 12,
+    "found": 0,
+    "positions": {
+      "name": null,
+      "name-full": null,
+      "name-dev": null,
+      "name-engineer": null,
+      "name-ai": null,
+      "name-deepgent": null,
+      "founder-en": null,
+      "founder-es": null,
+      "article-evals": null,
+      "article-geo": null,
+      "article-obs": null,
+      "article-agents": null
+    }
+  },
+  "results": [
+    {
+      "id": "name",
+      "q": "pablo albaladejo",
+      "position": null,
+      "blocked": false,
+      "top": [
+        "es.linkedin.com",
+        "es.wikipedia.org",
+        "cadenaser.com",
+        "murciastartup.com",
+        "laopiniondemurcia.es"
+      ]
+    },
+    {
+      "id": "name-full",
+      "q": "pablo albaladejo mestre",
+      "position": null,
+      "blocked": false,
+      "top": [
+        "es.linkedin.com",
+        "boe.es",
+        "resultados.triatlocv.org",
+        "f6s.com",
+        "pabloalbaladejomestre.blogspot.com"
+      ]
+    },
+    {
+      "id": "name-dev",
+      "q": "pablo albaladejo developer",
+      "position": null,
+      "blocked": false,
+      "top": []
+    },
+    {
+      "id": "name-engineer",
+      "q": "pablo albaladejo software engineer",
+      "position": null,
+      "blocked": false,
+      "top": []
+    },
+    {
+      "id": "name-ai",
+      "q": "pablo albaladejo ai engineer",
+      "position": null,
+      "blocked": false,
+      "top": []
+    },
+    {
+      "id": "name-deepgent",
+      "q": "pablo albaladejo deepgent",
+      "position": null,
+      "blocked": false,
+      "top": []
+    },
+    {
+      "id": "founder-en",
+      "q": "deepgent founder",
+      "position": null,
+      "blocked": false,
+      "top": []
+    },
+    {
+      "id": "founder-es",
+      "q": "quien fundó deepgent",
+      "position": null,
+      "blocked": false,
+      "top": []
+    },
+    {
+      "id": "article-evals",
+      "q": "evaluating LLM outputs in production",
+      "position": null,
+      "blocked": false,
+      "top": []
+    },
+    {
+      "id": "article-geo",
+      "q": "GEO how AI agents find you",
+      "position": null,
+      "blocked": false,
+      "top": []
+    },
+    {
+      "id": "article-obs",
+      "q": "observability for LLM pipelines",
+      "position": null,
+      "blocked": false,
+      "top": []
+    },
+    {
+      "id": "article-agents",
+      "q": "shipping production software with AI agents",
+      "position": null,
+      "blocked": false,
+      "top": []
+    }
+  ]
+}

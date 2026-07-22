@@ -1,0 +1,18 @@
+{
+  "site": "https://pabloalbaladejo.com",
+  "serpQueries": [
+    { "id": "name", "lang": "es", "q": "pablo albaladejo" },
+    { "id": "name-full", "lang": "es", "q": "pablo albaladejo mestre" },
+    { "id": "name-dev", "lang": "en", "q": "pablo albaladejo developer" },
+    { "id": "name-engineer", "lang": "en", "q": "pablo albaladejo software engineer" },
+    { "id": "name-ai", "lang": "en", "q": "pablo albaladejo ai engineer" },
+    { "id": "name-deepgent", "lang": "en", "q": "pablo albaladejo deepgent" },
+    { "id": "founder-en", "lang": "en", "q": "deepgent founder" },
+    { "id": "founder-es", "lang": "es", "q": "quien fundó deepgent" },
+    { "id": "article-evals", "lang": "en", "q": "evaluating LLM outputs in production" },
+    { "id": "article-geo", "lang": "en", "q": "GEO how AI agents find you" },
+    { "id": "article-obs", "lang": "en", "q": "observability for LLM pipelines" },
+    { "id": "article-agents", "lang": "en", "q": "shipping production software with AI agents" }
+  ],
+  "competitors": []
+}

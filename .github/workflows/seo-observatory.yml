@@ -1,0 +1,79 @@
+# Weekly SEO/GEO measurement for pabloalbaladejo.com.
+#
+# Ports the deepgent observatory pattern: collectors write time series to
+# reports/seo/timeseries/*.jsonl and this workflow opens a metrics PR with the
+# refreshed dashboard (an agent-opened PR — merge stays with the owner, per
+# AGENTS.md). Every collector no-ops gracefully when its secret is missing:
+#   GSC_SERVICE_ACCOUNT_JSON   Google Search Console (service account)
+#   BING_WEBMASTER_API_KEY     Bing Webmaster Tools
+# The DDG SERP snapshot needs no secret and always runs.
+name: SEO Observatory
+
+on:
+  schedule:
+    # Mondays 07:07 UTC (off-the-hour; after the deepgent run to spread load).
+    - cron: "7 7 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  observe:
+    name: Collect SEO/GEO metrics
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Google Search Console snapshot
+        env:
+          GSC_SERVICE_ACCOUNT_JSON: ${{ secrets.GSC_SERVICE_ACCOUNT_JSON }}
+        run: node scripts/geo/gsc-snapshot.mjs
+
+      - name: Bing Webmaster snapshot
+        env:
+          BING_WEBMASTER_API_KEY: ${{ secrets.BING_WEBMASTER_API_KEY }}
+        run: node scripts/geo/bing-snapshot.mjs
+
+      - name: SERP snapshot (DDG, keyless)
+        run: node scripts/geo/serp-snapshot.mjs
+
+      - name: Regenerate dashboard
+        run: node scripts/geo/seo-dashboard.mjs
+
+      - name: Detect changes
+        id: detect
+        run: |
+          if git status --porcelain reports/seo/ | grep -q .; then
+            echo "changed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "changed=false" >> "$GITHUB_OUTPUT"
+            echo "No metric changes this week."
+          fi
+
+      - name: Open metrics PR
+        if: steps.detect.outputs.changed == 'true'
+        uses: peter-evans/create-pull-request@v6
+        with:
+          branch: auto/seo-observatory-${{ github.run_id }}
+          commit-message: "chore(seo): weekly SEO/GEO observatory snapshot"
+          title: "chore(seo): weekly SEO/GEO observatory snapshot"
+          body: |
+            Automated weekly snapshot from the SEO/GEO observatory
+            (`.github/workflows/seo-observatory.yml`).
+
+            Review `reports/seo/DASHBOARD.md` in this diff for the
+            week-over-week movement; raw data lands in
+            `reports/seo/timeseries/` and `reports/seo/snapshots/`.
+          labels: |
+            seo
+            automated
+          add-paths: reports/seo/
+          delete-branch: true

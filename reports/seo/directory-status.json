@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-07-22",
+  "directories": {
+    "dev.to bio filled + site backlink": { "present": false, "url": "https://dev.to/pabloalbaladejo" },
+    "GitHub profile bio links the site directly": { "present": false, "url": "https://github.com/pablo-albaladejo" },
+    "LinkedIn consolidated to one profile": { "present": false, "url": "https://linkedin.com/in/pabloalbaladejomestre" },
+    "Crunchbase person profile (Deepgent founder)": { "present": false, "url": null },
+    "Crunchbase organization: Deepgent": { "present": false, "url": null },
+    "X/Twitter handle claimed": { "present": false, "url": null },
+    "Google knowledge panel": { "present": false, "url": null }
+  }
+}
