@@ -77,6 +77,15 @@ const api = async (url, body) => {
     headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
     body: body === undefined ? undefined : JSON.stringify(body),
   });
+  // 403 means the service account is not yet a user on the GSC property — a
+  // setup state, not a code failure. Skip so the other collectors still run.
+  if (response.status === 403) {
+    console.warn(
+      `[gsc] service account lacks permission on ${property} — add ${credentials.client_email} ` +
+        'as a user (Full) in Search Console > Settings > Users and permissions. Skipping.'
+    );
+    process.exit(0);
+  }
   if (!response.ok) throw new Error(`${url} -> ${response.status} ${await response.text()}`);
   return response.json();
 };
