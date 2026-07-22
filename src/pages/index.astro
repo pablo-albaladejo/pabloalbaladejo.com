@@ -21,7 +21,7 @@ const personJsonLd = JSON.stringify({
     addressCountry: "ES",
   },
   description:
-    "AI Engineer — production LLM systems, agents and infrastructure (AWS, TypeScript). Building software with AI agents; LLM evals, monitoring and observability. Creator of Kaiord.",
+    "AI Engineer — production LLM systems, agents and infrastructure (AWS, TypeScript). Founder of Deepgent. Building software with AI agents; LLM evals, monitoring and observability. Creator of Kaiord.",
   knowsAbout: [
     "AI agents",
     "LLM evaluation",
@@ -36,8 +36,26 @@ const personJsonLd = JSON.stringify({
     "https://github.com/pablo-albaladejo",
     "https://linkedin.com/in/pabloalbaladejomestre",
     "https://stackoverflow.com/users/3395884/pablo-albaladejo",
+    "https://dev.to/pabloalbaladejo",
     "https://kaiord.com",
+    "https://deepgent.net",
   ],
+});
+
+// deepgent.net's Organization/Person JSON-LD lists this site in the founder's
+// sameAs; emitting the mirror edge here makes the entity graph bidirectional
+// so engines can reconcile "Pablo Albaladejo" and "founder of Deepgent".
+const deepgentJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  name: "Deepgent",
+  url: "https://deepgent.net",
+  sameAs: ["https://www.linkedin.com/company/deepgent"],
+  founder: {
+    "@type": "Person",
+    name: "Pablo Albaladejo",
+    url: "https://pabloalbaladejo.com/",
+  },
 });
 
 const projects = [
@@ -52,7 +70,7 @@ const projects = [
     name: "Deepgent",
     href: "https://deepgent.net",
     blurb:
-      "Multi-tenant SaaS: branded AI chatbot over a curated knowledge base — embeddable widget, self-service portal, RAG on AWS Bedrock. Live in production.",
+      "Founder — multi-tenant SaaS: branded AI chatbot over a curated knowledge base — embeddable widget, self-service portal, RAG on AWS Bedrock. Live in production.",
   },
   {
     name: "trainingpeaks-sdk",
@@ -86,6 +104,11 @@ const fmt = (d: Date) => d.toISOString().slice(0, 10);
   <script
     type="application/ld+json"
     set:html={personJsonLd}
+    slot="head"
+  />
+  <script
+    type="application/ld+json"
+    set:html={deepgentJsonLd}
     slot="head"
   />
 
@@ -221,15 +244,23 @@ const fmt = (d: Date) => d.toISOString().slice(0, 10);
       <nav class="flex flex-wrap gap-6 font-mono text-[13.5px]">
         <a
           href="https://github.com/pablo-albaladejo"
+          rel="me"
           class="text-accent no-underline hover:underline">GitHub</a
         >
         <a
           href="https://linkedin.com/in/pabloalbaladejomestre"
+          rel="me"
           class="text-accent no-underline hover:underline">LinkedIn</a
         >
         <a
           href="https://stackoverflow.com/users/3395884/pablo-albaladejo"
+          rel="me"
           class="text-accent no-underline hover:underline">Stack Overflow</a
+        >
+        <a
+          href="https://dev.to/pabloalbaladejo"
+          rel="me"
+          class="text-accent no-underline hover:underline">dev.to</a
         >
         <a
           href="https://linkedin.com/in/pabloalbaladejomestre"
