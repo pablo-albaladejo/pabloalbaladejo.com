@@ -76,6 +76,15 @@ export class EmailStack extends Stack {
       resource: "identity",
       resourceName: DOMAIN,
     });
+    // In the SES sandbox, SendRawEmail is authorized against the DESTINATION
+    // identity too (not only the From/domain). Without permission on the Gmail
+    // identity the forwarder 403s: "not authorized to perform ses:SendRawEmail
+    // on resource identity/<gmail>". Grant both identities involved.
+    const forwardToIdentityArn = this.formatArn({
+      service: "ses",
+      resource: "identity",
+      resourceName: FORWARD_TO,
+    });
 
     const forwarder = new lambda.Function(this, "Forwarder", {
       runtime: lambda.Runtime.NODEJS_20_X,
@@ -96,7 +105,7 @@ export class EmailStack extends Stack {
     forwarder.addToRolePolicy(
       new iam.PolicyStatement({
         actions: ["ses:SendRawEmail"],
-        resources: [domainIdentityArn],
+        resources: [domainIdentityArn, forwardToIdentityArn],
       })
     );
 
