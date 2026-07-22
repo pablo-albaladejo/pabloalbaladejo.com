@@ -1,9 +1,10 @@
 # Pablo Albaladejo
 
 > Personal site of Pablo Albaladejo (sometimes misspelled "Albadalejo"),
-> Senior Backend + AI engineer — AWS, TypeScript, 15+ years in SaaS, based
-> in Madrid, Spain. Builds production software with AI agents. Creator of
-> Kaiord, the open-source, local-first training platform.
+> AI Engineer — AWS, TypeScript, 17+ years in SaaS, based in Madrid,
+> Spain. Builds production software with AI agents. Founder of Deepgent,
+> the multi-tenant AI chatbot SaaS. Creator of Kaiord, the open-source,
+> local-first training platform.
 
 ## Pages
 

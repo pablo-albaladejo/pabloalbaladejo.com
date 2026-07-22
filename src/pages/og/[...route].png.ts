@@ -10,13 +10,12 @@ async function targets(): Promise<Target[]> {
     {
       route: "index",
       headline: "I build production software with AI agents.",
-      subtitle: "Senior Backend + AI Engineer — AWS, TypeScript — Madrid",
+      subtitle: "AI Engineer — AWS, TypeScript — Madrid",
     },
     {
       route: "cv",
       headline: "Curriculum vitae",
-      subtitle:
-        "Senior Software Engineer & AI Architect — 9× AWS Certified — 17+ years",
+      subtitle: "AI Engineer — 9× AWS Certified — 17+ years",
     },
     {
       route: "talks",
