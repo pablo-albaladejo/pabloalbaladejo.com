@@ -6,6 +6,7 @@ type Props = {
   description: string;
   lang?: "en";
   path: string;
+  robots?: string;
   active?: "writing" | "talks" | "cv";
   ogImage?: string;
   ogType?: string;
@@ -17,6 +18,7 @@ const {
   description,
   lang = "en",
   path,
+  robots = "index, follow",
   active,
   ogImage = "/og/index.png",
   ogType = "website",
@@ -53,7 +55,7 @@ const navActive = "text-ink border-b-2 border-accent pb-0.5 no-underline";
     </script>
     <title>{title}</title>
     <meta name="description" content={description} />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content={robots} />
     <link rel="canonical" href={`${site}${path}`} />
     <link rel="alternate" hreflang="en" href={`${site}${path}`} />
     <link rel="alternate" hreflang="x-default" href={`${site}${path}`} />

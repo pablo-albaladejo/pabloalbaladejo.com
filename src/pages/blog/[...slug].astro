@@ -24,11 +24,24 @@ const minutes = Math.max(
 
 const articleJsonLd = JSON.stringify({
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "BlogPosting",
   headline: entry.data.title,
   description: entry.data.description,
   datePublished: entry.data.pubDate.toISOString(),
+  url: pageUrl,
+  image: `${site}/og/blog/${entry.id}.png`,
+  inLanguage: "en",
   author: {
+    "@type": "Person",
+    name: "Pablo Albaladejo",
+    url: "https://pabloalbaladejo.com/",
+    sameAs: [
+      "https://github.com/pablo-albaladejo",
+      "https://linkedin.com/in/pabloalbaladejomestre",
+      "https://dev.to/pabloalbaladejo",
+    ],
+  },
+  publisher: {
     "@type": "Person",
     name: "Pablo Albaladejo",
     url: "https://pabloalbaladejo.com/",
