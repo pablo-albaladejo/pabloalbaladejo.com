@@ -31,16 +31,54 @@ const proof = [
 
 const label = "font-mono text-[15px] font-semibold tracking-[0.08em] text-faint";
 const subLabel = "font-mono text-[12px] tracking-[0.08em] text-faint";
+
+// Mirrors the home Person entity so the speaker page carries the same
+// machine-readable identity engines use to reconcile the name.
+const speakerJsonLd = JSON.stringify({
+  "@context": "https://schema.org",
+  "@type": "ProfilePage",
+  mainEntity: {
+    "@type": "Person",
+    name: "Pablo Albaladejo",
+    url: "https://pabloalbaladejo.com/",
+    jobTitle: "AI Engineer",
+    description:
+      "Speaker on shipping production software with AI agents, LLM evaluation, and GEO. Talks in English and Spanish.",
+    knowsAbout: [
+      "AI agents",
+      "LLM evaluation",
+      "LLM observability",
+      "RAG",
+      "AI infrastructure",
+      "AWS",
+      "TypeScript",
+      "Production AI systems",
+    ],
+    sameAs: [
+      "https://github.com/pablo-albaladejo",
+      "https://linkedin.com/in/pabloalbaladejomestre",
+      "https://stackoverflow.com/users/3395884/pablo-albaladejo",
+      "https://dev.to/pabloalbaladejo",
+      "https://kaiord.com",
+      "https://deepgent.net",
+    ],
+  },
+});
 ---
 
 <Base
   title="Talks — Pablo Albaladejo"
-  description="Pablo Albaladejo, AI Engineer (production LLM systems, agents & infrastructure) — available for technical talks on shipping software with AI agents, evaluating LLMs in production, and GEO. English & Spanish, Madrid-based."
+  description="Pablo Albaladejo, AI Engineer — talks on shipping software with AI agents, LLM evals in production, and GEO. English & Spanish, Madrid-based."
   lang="en"
   path="/talks"
   active="talks"
   ogImage="/og/talks.png"
 >
+  <script
+    type="application/ld+json"
+    set:html={speakerJsonLd}
+    slot="head"
+  />
   <main class="mx-auto max-w-[70ch] pt-16 pb-24 min-[700px]:pt-[88px]">
     <h1
       class="mb-6 text-[38px] leading-[1.1] font-bold tracking-[-0.02em] text-pretty min-[700px]:text-[48px]"
